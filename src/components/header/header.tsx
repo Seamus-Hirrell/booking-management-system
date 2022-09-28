@@ -1,21 +1,16 @@
 import { component$, useStylesScoped$ } from '@builder.io/qwik';
-import styles from './header.css?inline';
+import styles from './header.css';
 
 export default component$(() => {
   useStylesScoped$(styles);
 
   return (
     <header>
+      <h1>Booking Management System</h1>
       <ul>
-        <li>
-          <p>item one</p>
-        </li>
-        <li>
-          <p>item one</p>
-        </li>
-        <li>
-          <p>item one</p>
-        </li>
+        <li>item one</li>
+        <li>item one</li>
+        <li>item one</li>
       </ul>
     </header>
   );
