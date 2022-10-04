@@ -1,9 +1,11 @@
-import { component$ } from '@builder.io/qwik';
+import { component$, useStylesScoped$ } from '@builder.io/qwik';
 import type { DocumentHead } from '@builder.io/qwik-city';
+import styles from './index.css';
 
 import { registerUser } from '~/api';
 
 export default component$(() => {
+  useStylesScoped$(styles);
   return (
     <div>
       <p>this is the body of the main page</p>

@@ -8,9 +8,15 @@ export default component$(() => {
     <header>
       <h1>Booking Management System</h1>
       <ul>
-        <li>item one</li>
-        <li>item one</li>
-        <li>item one</li>
+        <li>
+          <a>item one</a>
+        </li>
+        <li>
+          <a>item one</a>
+        </li>
+        <li>
+          <a>item one</a>
+        </li>
       </ul>
     </header>
   );
