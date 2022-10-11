@@ -1,8 +1,8 @@
 import { component$, useStylesScoped$ } from '@builder.io/qwik';
 import type { DocumentHead } from '@builder.io/qwik-city';
-import styles from './index.css';
 
 import { registerUser } from '~/api';
+import styles from './index.css';
 
 export const handleSubmit$ = (event: Event) => {
   event.preventDefault();
