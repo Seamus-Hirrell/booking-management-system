@@ -5,7 +5,7 @@ import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig(() => {
   return {
-    ssr: { target: 'webworker', noExternal: true },
+    ssr: { target: 'webworker', noExternal: true, external: ['appwrite'] },
     plugins: [qwikCity(), qwikVite(), tsconfigPaths()],
   };
 });
