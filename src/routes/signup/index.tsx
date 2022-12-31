@@ -1,17 +1,17 @@
-import { component$, useStylesScoped$ } from '@builder.io/qwik';
+import { component$, useStylesScoped$, $ } from '@builder.io/qwik';
 import type { DocumentHead } from '@builder.io/qwik-city';
 
 import { registerUser } from '~/api';
 import styles from './index.css';
 
-export const handleSubmit$ = (event: Event) => {
+export const handleSubmit = $((event: Event) => {
   event.preventDefault();
   const form = event.target as HTMLFormElement;
   const email = form.email.value;
   const password = form.password.value;
   const name = form.name2.value;
   registerUser(email, password, name);
-};
+});
 
 export default component$(() => {
   useStylesScoped$(styles);
@@ -21,7 +21,7 @@ export default component$(() => {
       <p>
         Already have an account? <a href="/login">Login</a>
       </p>
-      <form preventDefault:submit onSubmit$={handleSubmit$}>
+      <form preventDefault:submit onSubmit$={handleSubmit}>
         <label>
           Email
           <input type="email" name="email" />
