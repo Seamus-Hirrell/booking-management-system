@@ -1,8 +1,7 @@
-import { component$, useStylesScoped$, $ } from '@builder.io/qwik';
+import { component$, $ } from '@builder.io/qwik';
 import type { DocumentHead } from '@builder.io/qwik-city';
 
 import { registerUser } from '~/api';
-import styles from './index.css';
 
 export const handleSubmit = $((event: Event) => {
   event.preventDefault();
@@ -14,7 +13,6 @@ export const handleSubmit = $((event: Event) => {
 });
 
 export default component$(() => {
-  useStylesScoped$(styles);
   return (
     <div>
       <h3>Create an Account</h3>
