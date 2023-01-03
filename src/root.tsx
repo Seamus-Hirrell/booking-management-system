@@ -4,6 +4,7 @@ import { RouterHead } from './components/router-head/router-head';
 
 import './normalise.css';
 import './global.css';
+import 'dracula-ui/styles/dracula-ui.css';
 
 export default component$(() => {
   /**

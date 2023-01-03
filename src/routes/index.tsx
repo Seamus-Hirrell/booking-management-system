@@ -10,6 +10,7 @@ export default component$(() => {
     <div>
       <p>this is the body of the main page</p>
       <button
+        class="drac-btn drac-bg-purple"
         onClick$={() => {
           registerUser('john.doe@gmail.com', 'Testpass1!', 'John Doe');
         }}

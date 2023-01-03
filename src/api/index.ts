@@ -2,8 +2,8 @@ import { $ } from '@builder.io/qwik';
 import { Client, Account, ID } from 'appwrite';
 
 const client = new Client()
-  .setEndpoint('https://localhost/v1') // Your API Endpoint
-  .setProject('632cce4e4acb6c10a605'); // Your project ID
+  .setEndpoint('http://134.122.105.209/v1')
+  .setProject('63b0a101b617044131c3');
 export const account = new Account(client);
 
 // Register User
