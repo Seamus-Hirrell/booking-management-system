@@ -2,8 +2,6 @@ import { component$ } from '@builder.io/qwik';
 import { QwikCity, RouterOutlet, ServiceWorkerRegister } from '@builder.io/qwik-city';
 import { RouterHead } from './components/router-head/router-head';
 
-import './normalise.css';
-import './global.css';
 import 'dracula-ui/styles/dracula-ui.css';
 
 export default component$(() => {
