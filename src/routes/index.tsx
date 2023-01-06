@@ -5,10 +5,13 @@ import { registerUser } from '~/api';
 
 export default component$(() => {
   return (
-    <div>
-      <p>this is the body of the main page</p>
+    <div class="drac-box">
+      <span class="drac-text drac-line-height drac-text-white drac-p-sm">
+        The quick vampire jumps over the lazy human
+      </span>
+
       <button
-        class="drac-btn drac-bg-purple"
+        class="drac-btn drac-bg-green"
         onClick$={() => {
           registerUser('john.doe@gmail.com', 'Testpass1!', 'John Doe');
         }}

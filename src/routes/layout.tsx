@@ -3,13 +3,11 @@ import Header from '../components/header/header';
 
 export default component$(() => {
   return (
-    <>
-      <main>
-        <Header />
-        <section>
-          <Slot />
-        </section>
-      </main>
-    </>
+    <main>
+      <Header />
+      <section class="drac-p-sm">
+        <Slot />
+      </section>
+    </main>
   );
 });
