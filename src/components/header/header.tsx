@@ -11,13 +11,13 @@ export default component$(() => {
       </h1>
       <ul class="drac-tabs drac-tabs-green">
         <li class="drac-tab drac-tab-active">
-          <a class="drac-tab-link drac-text" href="#">
-            Item One
+          <a class="drac-tab-link drac-text" href="/login">
+            Log In
           </a>
         </li>
         <li class="drac-tab">
-          <a class="drac-tab-link drac-text" href="#">
-            Item Two
+          <a class="drac-tab-link drac-text" href="/signup">
+            Sign Up
           </a>
         </li>
         <li class="drac-tab">

@@ -19,3 +19,30 @@ export const registerUser = $(
     );
   }
 );
+
+// Log In User
+export const loginUser = $((email: string, password: string) => {
+  account.createEmailSession(email, password).then(
+    (response) => {
+      console.log(response);
+    },
+    (error) => {
+      console.log(error);
+    }
+  );
+});
+
+// Get User
+export const getUser = $(() => {
+  let resp;
+  account.get().then(
+    (response) => {
+      console.log(response);
+      resp = response;
+    },
+    (error) => {
+      console.log(error);
+    }
+  );
+  return resp;
+});
