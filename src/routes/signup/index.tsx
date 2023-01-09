@@ -1,5 +1,5 @@
 import { component$, $ } from '@builder.io/qwik';
-import type { DocumentHead } from '@builder.io/qwik-city';
+import { type DocumentHead } from '@builder.io/qwik-city';
 
 import { registerUser } from '~/api';
 
@@ -19,7 +19,7 @@ export default component$(() => {
       <p>
         Already have an account? <a href="/login">Login</a>
       </p>
-      <form preventDefault:submit onSubmit$={handleSubmit}>
+      <form preventdefault:submit onSubmit$={handleSubmit}>
         <label>
           Email
           <input type="email" name="email" />

@@ -1,5 +1,5 @@
 import { component$, $ } from '@builder.io/qwik';
-import { DocumentHead, useNavigate } from '@builder.io/qwik-city';
+import { type DocumentHead, useNavigate } from '@builder.io/qwik-city';
 
 import { loginUser, getUser } from '~/api';
 

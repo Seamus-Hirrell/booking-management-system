@@ -1,11 +1,9 @@
 import { component$, Resource, useResource$ } from '@builder.io/qwik';
-import { DocumentHead, useNavigate } from '@builder.io/qwik-city';
+import { type DocumentHead } from '@builder.io/qwik-city';
 
 import { account } from '~/api';
 
 export default component$(() => {
-  const nav = useNavigate();
-
   const userData = useResource$(() => {
     return account.get();
   });
