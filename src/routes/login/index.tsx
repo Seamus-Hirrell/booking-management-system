@@ -1,5 +1,5 @@
 import { component$, $ } from '@builder.io/qwik';
-import type { DocumentHead } from '@builder.io/qwik-city';
+import { DocumentHead, useNavigate } from '@builder.io/qwik-city';
 
 import { loginUser, getUser } from '~/api';
 
@@ -12,6 +12,7 @@ export const handleSubmit = $((event: Event) => {
 });
 
 export default component$(() => {
+  const nav = useNavigate();
   return (
     <div
       class="drac-box drac-d-flex"
@@ -19,15 +20,12 @@ export default component$(() => {
     >
       <span class="drac-text drac-line-height drac-text-white">Log In</span>
       <form
-        preventDefault:submit
+        preventdefault:submit
         onSubmit$={handleSubmit}
         class="drac-box drac-d-flex"
         style="flex-direction: column; gap: 10px;"
       >
-        <label
-          htmlFor="email"
-          class="drac-text drac-line-height drac-text-white"
-        >
+        <label for="email" class="drac-text drac-line-height drac-text-white">
           Email
         </label>
         <input
@@ -36,7 +34,7 @@ export default component$(() => {
           class="drac-input drac-input-green drac-text-green drac-input-outline"
         />
         <label
-          htmlFor="password"
+          for="password"
           class="drac-text drac-line-height drac-text-white"
         >
           Password
@@ -55,7 +53,15 @@ export default component$(() => {
           console.log(getUser());
         }}
       >
-        list user info
+        test list user info
+      </button>
+
+      <button
+        onClick$={() => {
+          nav.path = '/';
+        }}
+      >
+        go home
       </button>
     </div>
   );

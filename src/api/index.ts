@@ -34,15 +34,12 @@ export const loginUser = $((email: string, password: string) => {
 
 // Get User
 export const getUser = $(() => {
-  let resp;
   account.get().then(
     (response) => {
       console.log(response);
-      resp = response;
     },
     (error) => {
       console.log(error);
     }
   );
-  return resp;
 });
