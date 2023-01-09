@@ -21,8 +21,8 @@ export default component$(() => {
           </a>
         </li>
         <li class="drac-tab">
-          <a class="drac-tab-link drac-text" href="#">
-            Item Three
+          <a class="drac-tab-link drac-text" href="/dashboard">
+            Dashboard
           </a>
         </li>
       </ul>
