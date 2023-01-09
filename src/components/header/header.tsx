@@ -1,4 +1,5 @@
 import { component$ } from '@builder.io/qwik';
+import { Link } from '@builder.io/qwik-city';
 
 export default component$(() => {
   return (
@@ -11,19 +12,19 @@ export default component$(() => {
       </h1>
       <ul class="drac-tabs drac-tabs-green">
         <li class="drac-tab drac-tab-active">
-          <a class="drac-tab-link drac-text" href="/login">
+          <Link class="drac-tab-link drac-text" href="/login">
             Log In
-          </a>
+          </Link>
         </li>
         <li class="drac-tab">
-          <a class="drac-tab-link drac-text" href="/signup">
+          <Link class="drac-tab-link drac-text" href="/signup">
             Sign Up
-          </a>
+          </Link>
         </li>
         <li class="drac-tab">
-          <a class="drac-tab-link drac-text" href="/dashboard">
+          <Link class="drac-tab-link drac-text" href="/dashboard">
             Dashboard
-          </a>
+          </Link>
         </li>
       </ul>
     </header>
