@@ -1,11 +1,23 @@
 import { component$, Resource, useResource$ } from '@builder.io/qwik';
 import { type DocumentHead } from '@builder.io/qwik-city';
+import { Query } from 'appwrite';
 
-import { account } from '~/api';
+import { account, databases } from '~/api';
 
 export default component$(() => {
-  const userData = useResource$(() => {
-    return account.get();
+  const userData = useResource$(async () => {
+    const user = await account.get();
+
+    const appointments = await databases.listDocuments(
+      '63bdf02eddbf72fa2abe',
+      '63bdf0455a708734ce9b',
+      [Query.equal('userid', user.$id)]
+    );
+
+    return {
+      user,
+      appointments,
+    };
   });
 
   return (
@@ -24,9 +36,20 @@ export default component$(() => {
           </span>
         )}
         onResolved={(data) => (
-          <span class="drac-text drac-line-height drac-text-white">
-            Your email address is: {data.email}
-          </span>
+          <>
+            <span class="drac-text drac-line-height drac-text-white">
+              Your email address is: {data.user.email}
+              <br />
+              Your appointments are:
+            </span>
+            {data.appointments.documents.map((appointment) => {
+              return (
+                <span class="drac-text drac-line-height drac-text-white">
+                  {appointment.datetime}
+                </span>
+              );
+            })}
+          </>
         )}
       />
     </div>

@@ -1,10 +1,11 @@
 import { $ } from '@builder.io/qwik';
-import { Client, Account, ID } from 'appwrite';
+import { Client, Account, ID, Databases } from 'appwrite';
 
 const client = new Client()
   .setEndpoint('https://appwrite.xn--samushirrell-beb.live/v1')
   .setProject('63b0a101b617044131c3');
 export const account = new Account(client);
+export const databases = new Databases(client);
 
 // Register User
 export const registerUser = $(
