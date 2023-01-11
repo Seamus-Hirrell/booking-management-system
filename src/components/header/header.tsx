@@ -1,7 +1,8 @@
 import { component$ } from '@builder.io/qwik';
-import { Link } from '@builder.io/qwik-city';
+import { Link, useLocation } from '@builder.io/qwik-city';
 
 export default component$(() => {
+  const loc = useLocation();
   return (
     <header
       class="drac-box drac-bg-black drac-d-flex drac-p-sm"
@@ -11,19 +12,44 @@ export default component$(() => {
         Booking Management System
       </h1>
       <ul class="drac-tabs drac-tabs-green">
-        <li class="drac-tab drac-tab-active">
+        <li
+          class={{
+            'drac-tab': true,
+            'drac-tab-active': loc.href.includes('/login'),
+          }}
+        >
           <Link class="drac-tab-link drac-text" href="/login">
             Log In
           </Link>
         </li>
-        <li class="drac-tab">
+        <li
+          class={{
+            'drac-tab': true,
+            'drac-tab-active': loc.href.includes('/signup'),
+          }}
+        >
           <Link class="drac-tab-link drac-text" href="/signup">
             Sign Up
           </Link>
         </li>
-        <li class="drac-tab">
+        <li
+          class={{
+            'drac-tab': true,
+            'drac-tab-active': loc.href.includes('/dashboard'),
+          }}
+        >
           <Link class="drac-tab-link drac-text" href="/dashboard">
             Dashboard
+          </Link>
+        </li>
+        <li
+          class={{
+            'drac-tab': true,
+            'drac-tab-active': loc.href.includes('/about'),
+          }}
+        >
+          <Link class="drac-tab-link drac-text" href="/about">
+            About
           </Link>
         </li>
       </ul>
