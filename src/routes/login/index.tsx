@@ -1,7 +1,7 @@
 import { component$, $ } from '@builder.io/qwik';
-import { type DocumentHead, useNavigate } from '@builder.io/qwik-city';
+import { type DocumentHead } from '@builder.io/qwik-city';
 
-import { loginUser, getUser } from '~/api';
+import { loginUser } from '~/api';
 
 export const handleSubmit = $((event: Event) => {
   event.preventDefault();
@@ -12,7 +12,6 @@ export const handleSubmit = $((event: Event) => {
 });
 
 export default component$(() => {
-  const nav = useNavigate();
   return (
     <div
       class="drac-box drac-d-flex"
@@ -48,21 +47,6 @@ export default component$(() => {
           Log In
         </button>
       </form>
-      <button
-        onClick$={() => {
-          console.log(getUser());
-        }}
-      >
-        test list user info
-      </button>
-
-      <button
-        onClick$={() => {
-          nav.path = '/';
-        }}
-      >
-        go home
-      </button>
     </div>
   );
 });

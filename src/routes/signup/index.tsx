@@ -2,6 +2,7 @@ import { component$, $ } from '@builder.io/qwik';
 import { type DocumentHead } from '@builder.io/qwik-city';
 
 import { registerUser } from '~/api';
+import { boxStyle } from './styles.css';
 
 export const handleSubmit = $((event: Event) => {
   event.preventDefault();
@@ -14,29 +15,59 @@ export const handleSubmit = $((event: Event) => {
 
 export default component$(() => {
   return (
-    <div>
-      <h3>Create an Account</h3>
-      <p>
-        Already have an account? <a href="/login">Login</a>
-      </p>
-      <form preventdefault:submit onSubmit$={handleSubmit}>
-        <label>
+    <div class={boxStyle}>
+      <h2 class="drac-heading drac-heading-xl drac-text-white">
+        Create Account
+      </h2>
+      <form preventdefault:submit onSubmit$={handleSubmit} class={boxStyle}>
+        <label for="email" class="drac-text drac-line-height drac-text-white">
           Email
-          <input type="email" name="email" />
         </label>
-        <label>
+        <input
+          type="email"
+          name="email"
+          class="drac-input drac-input-green drac-text-green drac-input-outline"
+        />
+
+        <label
+          for="password"
+          class="drac-text drac-line-height drac-text-white"
+        >
           Password
-          <input type="password" name="password" />
         </label>
-        <label>
+        <input
+          type="password"
+          name="password"
+          class="drac-input drac-input-green drac-text-green drac-input-outline"
+        />
+
+        <label
+          for="confirmPassword"
+          class="drac-text drac-line-height drac-text-white"
+        >
           Confirm Password
-          <input type="password" name="confirmPassword" />
         </label>
-        <label>
+        <input
+          type="password"
+          name="confirmPassword"
+          class="drac-input drac-input-green drac-text-green drac-input-outline"
+        />
+
+        <label
+          for="fullName"
+          class="drac-text drac-line-height drac-text-white"
+        >
           Name
-          <input type="text" name="name2" />
         </label>
-        <button type="submit">click me</button>
+        <input
+          type="text"
+          name="fullName"
+          class="drac-input drac-input-green drac-text-green drac-input-outline"
+        />
+
+        <button type="submit" class="drac-btn drac-bg-white">
+          Submit
+        </button>
       </form>
     </div>
   );
