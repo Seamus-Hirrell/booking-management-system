@@ -9,7 +9,7 @@ export const handleSubmit = $((event: Event) => {
   const form = event.target as HTMLFormElement;
   const email = form.email.value;
   const password = form.password.value;
-  const name = form.name2.value;
+  const name = form.fullName.value;
   registerUser(email, password, name);
 });
 

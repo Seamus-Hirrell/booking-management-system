@@ -1,4 +1,4 @@
-import { component$, useStyles$ } from '@builder.io/qwik';
+import { component$ } from '@builder.io/qwik';
 import {
   QwikCityProvider,
   RouterOutlet,
@@ -6,7 +6,6 @@ import {
 } from '@builder.io/qwik-city';
 import { RouterHead } from './components/router-head/router-head';
 
-import globalStyles from './global.css?inline';
 import 'dracula-ui/styles/dracula-ui.css';
 
 export default component$(() => {
@@ -16,8 +15,6 @@ export default component$(() => {
    *
    * Dont remove the `<head>` and `<body>` elements.
    */
-  useStyles$(globalStyles);
-  useStyles$('dracula-ui/styles/dracula-ui.css');
 
   return (
     <QwikCityProvider>
@@ -26,7 +23,7 @@ export default component$(() => {
         <link rel="manifest" href="/manifest.json" />
         <RouterHead />
       </head>
-      <body lang="en" class="drac-bg-black-secondary">
+      <body lang="en" class="drac-bg-black-secondary drac-m-none">
         <RouterOutlet />
         <ServiceWorkerRegister />
       </body>
