@@ -38,17 +38,30 @@ export default component$(() => {
         onResolved={(data) => (
           <>
             <span class="drac-text drac-line-height drac-text-white">
-              Your email address is: {data.user.email}
-              <br />
-              Your appointments are:
+              Welcome {data.user.email}
             </span>
-            {data.appointments.documents.map((appointment) => {
-              return (
-                <span class="drac-text drac-line-height drac-text-white">
-                  {appointment.datetime}
-                </span>
-              );
-            })}
+            <table class="drac-table" style="max-width: 50%">
+              <thead>
+                <tr>
+                  <th class="drac-text drac-text-white">Date</th>
+                  <th class="drac-text drac-text-white">Time</th>
+                  <th class="drac-text drac-text-white">Duration</th>
+                </tr>
+              </thead>
+              <tbody>
+                {data.appointments.documents.map((appointment: any) => (
+                  <tr>
+                    <td class="drac-text drac-text-white">
+                      {new Date(appointment.datetime).toLocaleDateString()}
+                    </td>
+                    <td class="drac-text drac-text-white">
+                      {new Date(appointment.datetime).toLocaleTimeString()}
+                    </td>
+                    <td class="drac-text drac-text-white">15 minutes</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </>
         )}
       />
