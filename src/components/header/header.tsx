@@ -52,6 +52,16 @@ export default component$(() => {
             About
           </Link>
         </li>
+        <li
+          class={{
+            'drac-tab': true,
+            'drac-tab-active': loc.href.includes('/create'),
+          }}
+        >
+          <Link class="drac-tab-link drac-text" href="/create">
+            Create
+          </Link>
+        </li>
       </ul>
     </header>
   );

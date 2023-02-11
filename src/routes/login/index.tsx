@@ -4,7 +4,6 @@ import { type DocumentHead } from '@builder.io/qwik-city';
 import { loginUser } from '~/api';
 
 export const handleSubmit = $((event: Event) => {
-  event.preventDefault();
   const form = event.target as HTMLFormElement;
   const email = form.email.value;
   const password = form.password.value;

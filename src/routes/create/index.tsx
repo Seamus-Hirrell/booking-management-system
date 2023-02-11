@@ -25,7 +25,9 @@ export default component$(() => {
       class="drac-box drac-d-flex"
       style="flex-direction: column; align-items: center; gap: 20px;"
     >
-      <h1 class="drac-heading drac-heading-2xl drac-text-white">Dashboard</h1>
+      <h1 class="drac-heading drac-heading-2xl drac-text-white">
+        Create New Appointment
+      </h1>
       <Resource
         value={userData}
         onPending={() => <span>loading...</span>}
@@ -40,34 +42,18 @@ export default component$(() => {
             <span class="drac-text drac-line-height drac-text-white">
               Welcome {data.user.email}
             </span>
-            <Link
-              class="drac-btn drac-bg-purple drac-text-black"
-              href="/create"
-            >
-              Create New Appointment
+            <form>
+              <label class="drac-text drac-text-white">Date</label>
+              <input type="date" />
+              <label class="drac-text drac-text-white">Time</label>
+              <input type="time" />
+              <button class="drac-btn drac-bg-purple">
+                Create Appointment
+              </button>
+            </form>
+            <Link class="drac-btn drac-bg-purple" href="/dashboard">
+              Go Back
             </Link>
-            <table class="drac-table" style="max-width: 400px">
-              <thead>
-                <tr>
-                  <th class="drac-text drac-text-white">Date</th>
-                  <th class="drac-text drac-text-white">Time</th>
-                  <th class="drac-text drac-text-white">Duration</th>
-                </tr>
-              </thead>
-              <tbody>
-                {data.appointments.documents.map((appointment: any) => (
-                  <tr>
-                    <td class="drac-text drac-text-white">
-                      {new Date(appointment.datetime).toLocaleDateString()}
-                    </td>
-                    <td class="drac-text drac-text-white">
-                      {new Date(appointment.datetime).toLocaleTimeString()}
-                    </td>
-                    <td class="drac-text drac-text-white">15 minutes</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
           </>
         )}
       />
@@ -76,5 +62,5 @@ export default component$(() => {
 });
 
 export const head: DocumentHead = {
-  title: 'Dashboard',
+  title: 'Create Appointment',
 };
