@@ -1,4 +1,6 @@
 import { component$ } from '@builder.io/qwik';
+import { type DocumentHead } from '@builder.io/qwik-city';
+
 import { aboutStyle } from './styles.css';
 
 export default component$(() => {
@@ -49,3 +51,7 @@ export default component$(() => {
     </div>
   );
 });
+
+export const head: DocumentHead = {
+  title: 'About',
+};

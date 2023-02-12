@@ -1,8 +1,10 @@
-import { component$, Resource, useResource$ } from '@builder.io/qwik';
+import { component$, Resource, useResource$, $ } from '@builder.io/qwik';
 import { type DocumentHead, Link } from '@builder.io/qwik-city';
-import { Query } from 'appwrite';
 
+import { ID, Query } from 'appwrite';
 import { account, databases } from '~/api';
+
+import { formStyle } from './styles.css';
 
 export default component$(() => {
   const userData = useResource$(async () => {
@@ -18,6 +20,28 @@ export default component$(() => {
       user,
       appointments,
     };
+  });
+
+  const handleSubmit = $(async (event: Event) => {
+    const form = event.target as HTMLFormElement;
+    const date = form.date.value;
+    const time = form.time.value;
+    console.log(date, time);
+
+    const userid = (await userData.value).user.$id;
+
+    // combine date and time
+    const datetime = new Date(`${date}T${time}`);
+
+    databases.createDocument(
+      '63bdf02eddbf72fa2abe',
+      '63bdf0455a708734ce9b',
+      ID.unique(),
+      {
+        datetime,
+        userid,
+      }
+    );
   });
 
   return (
@@ -42,12 +66,28 @@ export default component$(() => {
             <span class="drac-text drac-line-height drac-text-white">
               Welcome {data.user.email}
             </span>
-            <form>
-              <label class="drac-text drac-text-white">Date</label>
-              <input type="date" />
-              <label class="drac-text drac-text-white">Time</label>
-              <input type="time" />
-              <button class="drac-btn drac-bg-purple">
+            <form
+              class={formStyle}
+              preventdefault:submit
+              onSubmit$={handleSubmit}
+            >
+              <label for="date" class="drac-text drac-text-white">
+                Date
+              </label>
+              <input
+                type="date"
+                name="date"
+                class="drac-input drac-input-green drac-text-white"
+              />
+              <label for="time" class="drac-text drac-text-white">
+                Time
+              </label>
+              <input
+                type="time"
+                name="time"
+                class="drac-input drac-input-green drac-text-white"
+              />
+              <button class="drac-btn drac-bg-purple" type="submit">
                 Create Appointment
               </button>
             </form>
