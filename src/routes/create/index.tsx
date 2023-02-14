@@ -2,7 +2,7 @@ import { component$, Resource, useResource$, $ } from '@builder.io/qwik';
 import { type DocumentHead, Link } from '@builder.io/qwik-city';
 
 import { ID, Query } from 'appwrite';
-import { account, databases } from '~/api';
+import { account, databases, teams } from '~/api';
 
 import { formStyle } from './styles.css';
 
@@ -26,7 +26,18 @@ export default component$(() => {
     const form = event.target as HTMLFormElement;
     const date = form.date.value;
     const time = form.time.value;
-    console.log(date, time);
+
+    // time can only be in 15 minute intervals
+    const lastTwo = time.split(':')[1];
+    if (
+      lastTwo !== '00' &&
+      lastTwo !== '15' &&
+      lastTwo !== '30' &&
+      lastTwo !== '45'
+    ) {
+      alert('Time must be in 15 minute intervals');
+      return;
+    }
 
     const userid = (await userData.value).user.$id;
 
@@ -42,6 +53,13 @@ export default component$(() => {
         userid,
       }
     );
+  });
+
+  // list all members of team 63ec03ceab377335c31b
+  const members = useResource$(async () => {
+    const members = await teams.listMemberships('63ec03ceab377335c31b');
+    console.log('members: ', members);
+    return members;
   });
 
   return (
@@ -94,6 +112,27 @@ export default component$(() => {
             <Link class="drac-btn drac-bg-purple" href="/dashboard">
               Go Back
             </Link>
+          </>
+        )}
+      />
+      <Resource
+        value={members}
+        onPending={() => <span>loading...</span>}
+        onRejected={(error) => (
+          <span class="drac-text drac-line-height drac-text-white">
+            error: {error.message}
+          </span>
+        )}
+        onResolved={(data) => (
+          <>
+            <h2 class="drac-heading drac-heading-2xl drac-text-white">
+              List Of Hospital Staff
+            </h2>
+            <ul class="drac-list">
+              {data.memberships.map((member) => (
+                <li class="drac-text drac-text-white">{member.userEmail}</li>
+              ))}
+            </ul>
           </>
         )}
       />
