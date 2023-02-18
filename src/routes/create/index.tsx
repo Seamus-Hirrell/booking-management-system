@@ -5,6 +5,7 @@ import { ID, Query } from 'appwrite';
 import { account, databases, teams } from '~/api';
 
 import { formStyle } from './styles.css';
+import { Calendar } from './calendar';
 
 export default component$(() => {
   const userData = useResource$(async () => {
@@ -112,6 +113,17 @@ export default component$(() => {
             <Link class="drac-btn drac-bg-purple" href="/dashboard">
               Go Back
             </Link>
+            <Calendar
+              weekStart={
+                new Date(
+                  // february 27th 2023
+                  2023,
+                  1,
+                  27
+                )
+              }
+              appointments={data.appointments}
+            />
           </>
         )}
       />
