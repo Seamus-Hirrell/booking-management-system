@@ -8,6 +8,8 @@ Each day is a row that contains 32 15 minute intervals.
 import { component$ } from '@builder.io/qwik';
 import type { Models } from 'appwrite';
 
+import { Day } from './day';
+
 interface CalendarProps {
   weekStart: Date;
   appointments: Models.DocumentList<Models.Document>;
@@ -26,5 +28,25 @@ export const Calendar = component$((props: CalendarProps) => {
     return appointmentWeekStart.getTime() === props.weekStart.getTime();
   });
 
-  return <>{appointments}</>;
+  return (
+    <>
+      <Day date={props.weekStart} appointments={appointments} />
+      <Day
+        date={new Date(props.weekStart.getTime() + 86400000)}
+        appointments={appointments}
+      />
+      <Day
+        date={new Date(props.weekStart.getTime() + 172800000)}
+        appointments={appointments}
+      />
+      <Day
+        date={new Date(props.weekStart.getTime() + 259200000)}
+        appointments={appointments}
+      />
+      <Day
+        date={new Date(props.weekStart.getTime() + 345600000)}
+        appointments={appointments}
+      />
+    </>
+  );
 });
