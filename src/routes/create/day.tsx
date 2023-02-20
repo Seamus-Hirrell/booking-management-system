@@ -30,42 +30,47 @@ export const Day = component$((props: DayProps) => {
   }
 
   return (
-    <div>
-      <h2>{props.date.toLocaleDateString()}</h2>
-      <div>
-        {hours.map((hour) => {
-          return (
-            <div>
-              {minutes.map((minute) => {
-                const time = `${hour}:${minute}`;
-                const appointment = appointments.find((appointment) => {
-                  const appointmentDate = new Date(appointment.datetime);
-                  return (
-                    appointmentDate.getHours() === hour &&
-                    appointmentDate.getMinutes() === minute
-                  );
-                });
+    <div class="drac-box drac-d-flex" style="gap: 10px">
+      <h2 class="drac-heading drac-heading-sm drac-text-white">
+        {props.date.toLocaleDateString()}
+      </h2>
+      {hours.map((hour) => {
+        return (
+          <div class="drac-box drac-d-flex" style="gap: 10px">
+            {minutes.map((minute) => {
+              const time = `${hour}:${minute < 10 ? '0' : ''}${minute}`;
 
+              const appointment = appointments.find((appointment) => {
+                const appointmentDate = new Date(appointment.datetime);
                 return (
-                  <div>
-                    {appointment ? (
-                      <div>
-                        <span>{appointment.datetime}</span>
-                        <span>{appointment.userid}</span>
-                      </div>
-                    ) : (
-                      <div>
-                        <span>{time}</span>
-                        <span>Available</span>
-                      </div>
-                    )}
-                  </div>
+                  appointmentDate.getHours() === hour &&
+                  appointmentDate.getMinutes() === minute
                 );
-              })}
-            </div>
-          );
-        })}
-      </div>
+              });
+
+              return (
+                <>
+                  {appointment ? (
+                    // red box
+                    <div class="drac-box drac-d-flex drac-bg-red">
+                      <span class="drac-text drac-text-black drac-line-height">
+                        {time}
+                      </span>
+                    </div>
+                  ) : (
+                    // green box
+                    <div class="drac-box drac-d-flex drac-bg-green">
+                      <span class="drac-text drac-text-black drac-line-height">
+                        {time}
+                      </span>
+                    </div>
+                  )}
+                </>
+              );
+            })}
+          </div>
+        );
+      })}
     </div>
   );
 });
