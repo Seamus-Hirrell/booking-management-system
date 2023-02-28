@@ -19,15 +19,8 @@ export const Day = component$((props: DayProps) => {
     return appointmentDate.getDate() === props.date.getDate();
   });
 
-  const hours = [];
-  for (let i = 9; i < 17; i++) {
-    hours.push(i);
-  }
-
-  const minutes: number[] = [];
-  for (let i = 0; i < 60; i += 15) {
-    minutes.push(i);
-  }
+  const hours = [9, 10, 11, 12, 13, 14, 15, 16];
+  const minutes = [0, 15, 30, 45];
 
   return (
     <div class="drac-box drac-d-flex" style="gap: 10px">
