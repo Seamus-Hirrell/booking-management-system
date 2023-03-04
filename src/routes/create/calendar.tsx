@@ -29,7 +29,7 @@ export const Calendar = component$((props: CalendarProps) => {
   });
 
   return (
-    <>
+    <div class="drac-box">
       <Day date={props.weekStart} appointments={appointments} />
       <Day
         date={new Date(props.weekStart.getTime() + 86400000)}
@@ -47,6 +47,6 @@ export const Calendar = component$((props: CalendarProps) => {
         date={new Date(props.weekStart.getTime() + 345600000)}
         appointments={appointments}
       />
-    </>
+    </div>
   );
 });

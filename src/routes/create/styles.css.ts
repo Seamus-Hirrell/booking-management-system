@@ -11,3 +11,23 @@ export const formStyle = style([
     gap: '10px',
   },
 ]);
+
+// red box style
+export const redBoxStyle = style([
+  'drac-box',
+  'drac-bg-red',
+  {
+    'width': '10px',
+    'height': '10px',
+  },
+]);
+
+// green box style
+export const greenBoxStyle = style([
+  'drac-box',
+  'drac-bg-green',
+  {
+    'width': '10px',
+    'height': '10px',
+  },
+]);

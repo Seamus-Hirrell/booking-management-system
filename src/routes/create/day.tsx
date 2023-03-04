@@ -7,6 +7,8 @@ Each day is a row that contains 32 15 minute intervals.
 import { component$ } from '@builder.io/qwik';
 import type { Models } from 'appwrite';
 
+import { redBoxStyle, greenBoxStyle } from './styles.css';
+
 interface DayProps {
   date: Date;
   appointments: Models.Document[];
@@ -23,15 +25,12 @@ export const Day = component$((props: DayProps) => {
   const minutes = [0, 15, 30, 45];
 
   return (
-    <div class="drac-box drac-d-flex" style="gap: 10px">
-      <h2 class="drac-heading drac-heading-sm drac-text-white">
-        {props.date.toLocaleDateString()}
-      </h2>
+    <div class="drac-box drac-d-flex">
       {hours.map((hour) => {
         return (
-          <div class="drac-box drac-d-flex" style="gap: 10px">
+          <div class="drac-box drac-d-flex">
             {minutes.map((minute) => {
-              const time = `${hour}:${minute < 10 ? '0' : ''}${minute}`;
+              // const time = `${hour}:${minute < 10 ? '0' : ''}${minute}`;
 
               const appointment = appointments.find((appointment) => {
                 const appointmentDate = new Date(appointment.datetime);
@@ -45,18 +44,10 @@ export const Day = component$((props: DayProps) => {
                 <>
                   {appointment ? (
                     // red box
-                    <div class="drac-box drac-d-flex drac-bg-red">
-                      <span class="drac-text drac-text-black drac-line-height">
-                        {time}
-                      </span>
-                    </div>
+                    <div class={redBoxStyle} />
                   ) : (
                     // green box
-                    <div class="drac-box drac-d-flex drac-bg-green">
-                      <span class="drac-text drac-text-black drac-line-height">
-                        {time}
-                      </span>
-                    </div>
+                    <div class={greenBoxStyle} />
                   )}
                 </>
               );
