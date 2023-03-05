@@ -34,7 +34,15 @@ export const redBoxStyle = style(['drac-bg-red', boxStyle]);
 export const greenBoxStyle = style(['drac-bg-green', boxStyle]);
 
 // calendar header style
-export const calendarHeaderStyle = style([
+export const calendarHeaderSpaceStyle = style([
+  'drac-box',
+  {
+    width: '100px',
+  },
+]);
+
+// calendar header section style
+export const calendarHeaderSectionStyle = style([
   'drac-box',
   'drac-text',
   'drac-text-white',

@@ -26,35 +26,44 @@ export const Day = component$((props: DayProps) => {
 
   return (
     <div class="drac-box drac-d-flex">
-      {hours.map((hour) => {
-        return (
-          <div class="drac-box drac-d-flex">
-            {minutes.map((minute) => {
-              // const time = `${hour}:${minute < 10 ? '0' : ''}${minute}`;
+      <div
+        class="drac-text drac-text-white drac-line-height"
+        style="width: 100px"
+      >
+        {/* display the name of the current day of the week */}
+        {props.date.toLocaleDateString('en-UK', { weekday: 'long' })}
+      </div>
+      <div class="drac-box drac-d-flex">
+        {hours.map((hour) => {
+          return (
+            <div class="drac-box drac-d-flex">
+              {minutes.map((minute) => {
+                // const time = `${hour}:${minute < 10 ? '0' : ''}${minute}`;
 
-              const appointment = appointments.find((appointment) => {
-                const appointmentDate = new Date(appointment.datetime);
+                const appointment = appointments.find((appointment) => {
+                  const appointmentDate = new Date(appointment.datetime);
+                  return (
+                    appointmentDate.getHours() === hour &&
+                    appointmentDate.getMinutes() === minute
+                  );
+                });
+
                 return (
-                  appointmentDate.getHours() === hour &&
-                  appointmentDate.getMinutes() === minute
+                  <>
+                    {appointment ? (
+                      // red box
+                      <div class={redBoxStyle} />
+                    ) : (
+                      // green box
+                      <div class={greenBoxStyle} />
+                    )}
+                  </>
                 );
-              });
-
-              return (
-                <>
-                  {appointment ? (
-                    // red box
-                    <div class={redBoxStyle} />
-                  ) : (
-                    // green box
-                    <div class={greenBoxStyle} />
-                  )}
-                </>
-              );
-            })}
-          </div>
-        );
-      })}
+              })}
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 });
