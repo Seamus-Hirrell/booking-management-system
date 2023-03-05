@@ -12,22 +12,34 @@ export const formStyle = style([
   },
 ]);
 
-// red box style
-export const redBoxStyle = style([
+export const boxWidth = 45;
+export const boxHeight = 30;
+
+// box style
+export const boxStyle = style([
   'drac-box',
-  'drac-bg-red',
+  'drac-border-black',
   {
-    'width': '10px',
-    'height': '10px',
+    width: `${boxWidth}px`,
+    height: `${boxHeight}px`,
+    borderWidth: '1px',
+    borderStyle: 'solid',
   },
 ]);
 
+// red box style
+export const redBoxStyle = style(['drac-bg-red', boxStyle]);
+
 // green box style
-export const greenBoxStyle = style([
+export const greenBoxStyle = style(['drac-bg-green', boxStyle]);
+
+// calendar header style
+export const calendarHeaderStyle = style([
   'drac-box',
-  'drac-bg-green',
+  'drac-text',
+  'drac-text-white',
+  'drac-line-height',
   {
-    'width': '10px',
-    'height': '10px',
+    width: `${boxWidth * 4}px`,
   },
 ]);

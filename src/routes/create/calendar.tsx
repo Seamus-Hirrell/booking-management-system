@@ -7,6 +7,7 @@ Each day is a row that contains 32 15 minute intervals.
 
 import { component$ } from '@builder.io/qwik';
 import type { Models } from 'appwrite';
+import { CalendarHeader } from './calendarHeader';
 
 import { Day } from './day';
 
@@ -30,6 +31,7 @@ export const Calendar = component$((props: CalendarProps) => {
 
   return (
     <div class="drac-box">
+      <CalendarHeader />
       <Day date={props.weekStart} appointments={appointments} />
       <Day
         date={new Date(props.weekStart.getTime() + 86400000)}
