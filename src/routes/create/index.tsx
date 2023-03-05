@@ -1,4 +1,10 @@
-import { component$, Resource, useResource$, $ } from '@builder.io/qwik';
+import {
+  component$,
+  Resource,
+  useResource$,
+  $,
+  useSignal,
+} from '@builder.io/qwik';
 import { type DocumentHead, Link } from '@builder.io/qwik-city';
 
 import { ID, Query } from 'appwrite';
@@ -6,8 +12,17 @@ import { account, databases, teams } from '~/api';
 
 import { formStyle } from './styles.css';
 import { Calendar } from './calendar';
+import { WeekSelector } from './weekSelector';
 
 export default component$(() => {
+  const weekStart = useSignal(
+    new Date(
+      new Date().getFullYear(),
+      new Date().getMonth(),
+      new Date().getDate() - new Date().getDay() + 1
+    )
+  );
+
   const userData = useResource$(async () => {
     const user = await account.get();
 
@@ -85,6 +100,11 @@ export default component$(() => {
             <span class="drac-text drac-line-height drac-text-white">
               Welcome {data.user.email}
             </span>
+            <WeekSelector weekStart={weekStart} />
+            <Calendar
+              weekStart={weekStart.value}
+              appointments={data.appointments}
+            />
             <form
               class={formStyle}
               preventdefault:submit
@@ -113,17 +133,6 @@ export default component$(() => {
             <Link class="drac-btn drac-bg-purple" href="/dashboard">
               Go Back
             </Link>
-            <Calendar
-              weekStart={
-                new Date(
-                  // february 27th 2023
-                  2023,
-                  1,
-                  27
-                )
-              }
-              appointments={data.appointments}
-            />
           </>
         )}
       />
