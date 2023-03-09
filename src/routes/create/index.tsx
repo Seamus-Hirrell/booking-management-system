@@ -8,7 +8,7 @@ import {
 import { type DocumentHead, Link } from '@builder.io/qwik-city';
 
 import { ID, Query } from 'appwrite';
-import { account, databases, teams } from '~/api';
+import { account, databases } from '~/api';
 
 import { formStyle } from './styles.css';
 import { Calendar } from './calendar';
@@ -71,13 +71,6 @@ export default component$(() => {
     );
   });
 
-  // list all members of team 63ec03ceab377335c31b
-  const members = useResource$(async () => {
-    const members = await teams.listMemberships('63ec03ceab377335c31b');
-    console.log('members: ', members);
-    return members;
-  });
-
   return (
     <div
       class="drac-box drac-d-flex"
@@ -133,27 +126,6 @@ export default component$(() => {
             <Link class="drac-btn drac-bg-purple" href="/dashboard">
               Go Back
             </Link>
-          </>
-        )}
-      />
-      <Resource
-        value={members}
-        onPending={() => <span>loading...</span>}
-        onRejected={(error) => (
-          <span class="drac-text drac-line-height drac-text-white">
-            error: {error.message}
-          </span>
-        )}
-        onResolved={(data) => (
-          <>
-            <h2 class="drac-heading drac-heading-2xl drac-text-white">
-              List Of Hospital Staff
-            </h2>
-            <ul class="drac-list">
-              {data.memberships.map((member) => (
-                <li class="drac-text drac-text-white">{member.userEmail}</li>
-              ))}
-            </ul>
           </>
         )}
       />
