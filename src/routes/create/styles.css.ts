@@ -12,7 +12,7 @@ export const formStyle = style([
   },
 ]);
 
-export const boxWidth = 45;
+export const boxWidth = 55;
 export const boxHeight = 30;
 
 // box style
@@ -44,10 +44,21 @@ export const calendarHeaderSpaceStyle = style([
 // calendar header section style
 export const calendarHeaderSectionStyle = style([
   'drac-box',
+  'drac-d-flex',
   'drac-text',
   'drac-text-white',
   'drac-line-height',
   {
-    width: `${boxWidth * 4}px`,
+    width: boxWidth,
+    justifyContent: 'space-between',
+  },
+]);
+
+export const dividerStyle = style([
+  'drac-box',
+  'drac-border-purple',
+  {
+    borderRightWidth: '1px',
+    borderRightStyle: 'solid',
   },
 ]);
