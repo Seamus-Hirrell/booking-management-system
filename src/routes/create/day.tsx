@@ -4,8 +4,9 @@ Each day begins at 9am and ends at 5pm.
 Each day is a row that contains 32 15 minute intervals.
 */
 
-import { component$ } from '@builder.io/qwik';
+import { component$, useStore } from '@builder.io/qwik';
 import type { Models } from 'appwrite';
+import { Modal } from './modal';
 
 import { redBoxStyle, greenBoxStyle } from './styles.css';
 
@@ -30,7 +31,6 @@ export const Day = component$((props: DayProps) => {
         class="drac-text drac-text-white drac-line-height"
         style="width: 100px"
       >
-        {/* display the name of the current day of the week */}
         {props.date.toLocaleDateString('en-UK', { weekday: 'long' })}
       </div>
       <div class="drac-box drac-d-flex">
@@ -38,8 +38,6 @@ export const Day = component$((props: DayProps) => {
           return (
             <div class="drac-box drac-d-flex">
               {minutes.map((minute) => {
-                // const time = `${hour}:${minute < 10 ? '0' : ''}${minute}`;
-
                 const appointment = appointments.find((appointment) => {
                   const appointmentDate = new Date(appointment.datetime);
                   return (
@@ -48,14 +46,35 @@ export const Day = component$((props: DayProps) => {
                   );
                 });
 
+                const store = useStore({
+                  isOpen: false,
+                });
+
                 return (
                   <>
                     {appointment ? (
-                      // red box
                       <div class={redBoxStyle} />
                     ) : (
-                      // green box
-                      <div class={greenBoxStyle} />
+                      <>
+                        <button
+                          onClick$={() => {
+                            store.isOpen = true;
+                          }}
+                          class={greenBoxStyle}
+                        />
+                        <Modal
+                          dateTime={
+                            new Date(
+                              props.date.getFullYear(),
+                              props.date.getMonth(),
+                              props.date.getDate(),
+                              hour,
+                              minute
+                            )
+                          }
+                          isOpen={store.isOpen}
+                        />
+                      </>
                     )}
                   </>
                 );

@@ -24,6 +24,7 @@ export const boxStyle = style([
     height: `${boxHeight}px`,
     borderWidth: '1px',
     borderStyle: 'solid',
+    borderRadius: 'unset',
   },
 ]);
 
@@ -31,7 +32,7 @@ export const boxStyle = style([
 export const redBoxStyle = style(['drac-bg-red', boxStyle]);
 
 // green box style
-export const greenBoxStyle = style(['drac-bg-green', boxStyle]);
+export const greenBoxStyle = style(['drac-bg-green', 'drac-btn', boxStyle]);
 
 // calendar header style
 export const calendarHeaderSpaceStyle = style([
