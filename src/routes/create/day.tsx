@@ -4,7 +4,7 @@ Each day begins at 9am and ends at 5pm.
 Each day is a row that contains 32 15 minute intervals.
 */
 
-import { component$, useStore } from '@builder.io/qwik';
+import { component$, useSignal, type Signal } from '@builder.io/qwik';
 import type { Models } from 'appwrite';
 import { Modal } from './modal';
 
@@ -46,9 +46,8 @@ export const Day = component$((props: DayProps) => {
                   );
                 });
 
-                const store = useStore({
-                  isOpen: false,
-                });
+                const dialogRef =
+                  useSignal<HTMLDialogElement>() as Signal<HTMLDialogElement>;
 
                 return (
                   <>
@@ -58,7 +57,7 @@ export const Day = component$((props: DayProps) => {
                       <>
                         <button
                           onClick$={() => {
-                            store.isOpen = true;
+                            dialogRef.value.showModal();
                           }}
                           class={greenBoxStyle}
                         />
@@ -72,7 +71,7 @@ export const Day = component$((props: DayProps) => {
                               minute
                             )
                           }
-                          isOpen={store.isOpen}
+                          dialogRef={dialogRef}
                         />
                       </>
                     )}

@@ -1,21 +1,23 @@
-import { component$ } from '@builder.io/qwik';
+import { component$, type Signal } from '@builder.io/qwik';
+import { dialogStyle } from './styles.css';
 
 interface ModalProps {
   dateTime: Date;
-  isOpen: boolean;
+  dialogRef: Signal<HTMLDialogElement>;
 }
 
 export const Modal = component$((props: ModalProps) => {
   return (
-    <dialog open={props.isOpen}>
+    <dialog style={dialogStyle} ref={props.dialogRef}>
       <form method="dialog">
         <span class="drac-text drac-line-height drac-text-black">
-          Are you sure you want to create an appointment on{' '}
-          {props.dateTime.toLocaleString()}?
+          Create an appointment for {props.dateTime.toLocaleString()}?
         </span>
         <div>
-          <button value="cancel">Cancel</button>
-          <button id="confirmBtn" value="default">
+          <button value="cancel" class="drac-btn drac-bg-purple">
+            Cancel
+          </button>
+          <button value="default" class="drac-btn drac-bg-purple">
             Confirm
           </button>
         </div>

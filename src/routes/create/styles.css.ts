@@ -1,3 +1,4 @@
+import { globalStyle } from '@vanilla-extract/css';
 import { style } from 'styled-vanilla-extract/qwik';
 
 export const formStyle = style([
@@ -63,3 +64,16 @@ export const dividerStyle = style([
     borderRightStyle: 'solid',
   },
 ]);
+
+export const dialogStyle = style({
+  backgroundColor: '#ffffff',
+  border: '1px solid #000000',
+  borderRadius: '5px',
+  boxShadow: '0 0 10px #000000',
+  padding: '10px',
+  width: '400px',
+});
+
+globalStyle('::backdrop', {
+  backgroundColor: 'rgba(0, 0, 0, 0.7)',
+});
