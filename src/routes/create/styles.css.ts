@@ -65,12 +65,6 @@ export const dividerStyle = style([
   },
 ]);
 
-export const dialogStyle = style([
-  'drac-box',
-  'drac-bg-white',
-  'drac-border-purple',
-]);
-
 globalStyle('::backdrop', {
   backgroundColor: 'rgba(0, 0, 0, 0.7)',
 });

@@ -1,5 +1,9 @@
 import { component$, type Signal } from '@builder.io/qwik';
-import { dialogStyle } from './styles.css';
+import {
+  buttonContainerStyle,
+  dialogStyle,
+  formStyle,
+} from './modal_styles.css';
 
 interface ModalProps {
   dateTime: Date;
@@ -9,18 +13,18 @@ interface ModalProps {
 export const Modal = component$((props: ModalProps) => {
   return (
     <dialog class={dialogStyle} ref={props.dialogRef}>
-      <form method="dialog">
+      <form method="dialog" class={formStyle}>
         <span class="drac-text drac-line-height drac-text-black">
           Create an appointment for {props.dateTime.toLocaleString()}?
         </span>
-        <div>
+        <span class={buttonContainerStyle}>
           <button value="cancel" class="drac-btn drac-bg-purple">
             Cancel
           </button>
           <button value="default" class="drac-btn drac-bg-purple">
             Confirm
           </button>
-        </div>
+        </span>
       </form>
     </dialog>
   );
