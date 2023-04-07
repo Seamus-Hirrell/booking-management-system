@@ -8,7 +8,7 @@ interface ModalProps {
 
 export const Modal = component$((props: ModalProps) => {
   return (
-    <dialog style={dialogStyle} ref={props.dialogRef}>
+    <dialog class={dialogStyle} ref={props.dialogRef}>
       <form method="dialog">
         <span class="drac-text drac-line-height drac-text-black">
           Create an appointment for {props.dateTime.toLocaleString()}?
