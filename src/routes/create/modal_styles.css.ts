@@ -19,7 +19,9 @@ export const formStyle = style([
 export const buttonContainerStyle = style([
   'drac-box',
   'drac-d-flex',
+  'drac-w-full',
   {
     gap: '10px',
+    justifyContent: 'space-between',
   },
 ]);

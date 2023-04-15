@@ -19,32 +19,43 @@ export const handleSubmit = $(async (event: Event) => {
   const datetime = new Date(form.date.value);
   const reason = form.reason.value;
 
-  console.log(datetime, userid, reason);
-
-  databases.createDocument(
-    '63bdf02eddbf72fa2abe',
-    '63bdf0455a708734ce9b',
-    ID.unique(),
-    {
-      datetime,
-      userid,
-      reason,
-    }
-  );
+  databases
+    .createDocument(
+      '63bdf02eddbf72fa2abe',
+      '63bdf0455a708734ce9b',
+      ID.unique(),
+      {
+        datetime,
+        userid,
+        reason,
+      }
+    )
+    .then(
+      (response) => {
+        console.log('response', response);
+        alert('Appointment created!');
+      },
+      (error) => {
+        console.log(error);
+        alert('Error creating appointment');
+      }
+    );
 });
 
 export const Modal = component$((props: ModalProps) => {
   return (
     <dialog class={dialogStyle} ref={props.dialogRef}>
       <form method="dialog" class={formStyle} onSubmit$={handleSubmit}>
-        <span class="drac-text drac-line-height drac-text-black">
-          Create an appointment for {props.dateTime.toLocaleString()}?
+        <span class="drac-heading drac-text-black">
+          Creating an appointment for {props.dateTime.toLocaleString()}
         </span>
         <input type="hidden" name="date" value={props.dateTime.toISOString()} />
+        <hr class="drac-divider drac-w-full" />
         <label for="reason" class="drac-text drac-line-height drac-text-black">
           Reason
         </label>
         <textarea id="reason" name="reason" />
+        <hr class="drac-divider drac-w-full" />
         <span class={buttonContainerStyle}>
           <button value="cancel" class="drac-btn drac-bg-purple">
             Cancel
