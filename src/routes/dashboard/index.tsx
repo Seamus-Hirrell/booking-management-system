@@ -56,7 +56,7 @@ export default component$(() => {
               </thead>
               <tbody>
                 {data.appointments.documents.map((appointment: any) => (
-                  <tr>
+                  <tr key={appointment.$id}>
                     <td class="drac-text drac-text-white">
                       {new Date(appointment.datetime).toLocaleDateString()}
                     </td>

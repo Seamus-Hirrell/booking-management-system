@@ -9,9 +9,9 @@
     "build": "qwik build",
     "build.client": "vite build",
     "build.preview": "vite build --ssr src/entry.preview.tsx",
-    "build.server": "vite build -c adaptors/cloudflare-pages/vite.config.ts",
+    "build.server": "vite build -c adapters/cloudflare-pages/vite.config.ts",
     "build.types": "tsc --incremental --noEmit",
-    "deploy": "wrangler pages dev ./dist",
+    "deploy": "wrangler pages publish ./dist --branch preview",
     "dev": "vite --mode ssr",
     "dev.debug": "node --inspect-brk ./node_modules/vite/bin/vite.js --mode ssr --force",
     "fmt": "prettier --write .",
@@ -39,7 +39,7 @@
     "undici": "5.21.2",
     "vite": "4.2.1",
     "vite-tsconfig-paths": "4.2.0",
-    "wrangler": "^2.15.1"
+    "wrangler": "latest"
   },
   "dependencies": {
     "appwrite": "^11.0.0",

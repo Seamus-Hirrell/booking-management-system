@@ -3,6 +3,7 @@ import { Link, useLocation } from '@builder.io/qwik-city';
 
 export default component$(() => {
   const loc = useLocation();
+
   return (
     <header
       class="drac-box drac-bg-black drac-d-flex drac-p-sm"
@@ -15,7 +16,7 @@ export default component$(() => {
         <li
           class={{
             'drac-tab': true,
-            'drac-tab-active': loc.href.includes('/login'),
+            'drac-tab-active': loc.url.pathname === '/login/',
           }}
         >
           <Link class="drac-tab-link drac-text" href="/login">
@@ -25,7 +26,7 @@ export default component$(() => {
         <li
           class={{
             'drac-tab': true,
-            'drac-tab-active': loc.href.includes('/signup'),
+            'drac-tab-active': loc.url.pathname === '/signup/',
           }}
         >
           <Link class="drac-tab-link drac-text" href="/signup">
@@ -35,7 +36,7 @@ export default component$(() => {
         <li
           class={{
             'drac-tab': true,
-            'drac-tab-active': loc.href.includes('/dashboard'),
+            'drac-tab-active': loc.url.pathname === '/dashboard/',
           }}
         >
           <Link class="drac-tab-link drac-text" href="/dashboard">
@@ -45,7 +46,7 @@ export default component$(() => {
         <li
           class={{
             'drac-tab': true,
-            'drac-tab-active': loc.href.includes('/about'),
+            'drac-tab-active': loc.url.pathname === '/about/',
           }}
         >
           <Link class="drac-tab-link drac-text" href="/about">
@@ -55,7 +56,7 @@ export default component$(() => {
         <li
           class={{
             'drac-tab': true,
-            'drac-tab-active': loc.href.includes('/create'),
+            'drac-tab-active': loc.url.pathname === '/create/',
           }}
         >
           <Link class="drac-tab-link drac-text" href="/create">

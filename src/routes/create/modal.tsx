@@ -1,9 +1,17 @@
-import { component$, $, type Signal } from '@builder.io/qwik';
+import {
+  component$,
+  $,
+  type Signal,
+  type QwikSubmitEvent,
+} from '@builder.io/qwik';
+import { useNavigate } from '@builder.io/qwik-city';
+
 import {
   buttonContainerStyle,
   dialogStyle,
   formStyle,
 } from './modal_styles.css';
+
 import { account, databases } from '~/api';
 import { ID } from 'appwrite';
 
@@ -12,37 +20,41 @@ interface ModalProps {
   dialogRef: Signal<HTMLDialogElement>;
 }
 
-export const handleSubmit = $(async (event: Event) => {
-  const form = event.target as HTMLFormElement;
-
-  const userid = (await account.get()).$id;
-  const datetime = new Date(form.date.value);
-  const reason = form.reason.value;
-
-  databases
-    .createDocument(
-      '63bdf02eddbf72fa2abe',
-      '63bdf0455a708734ce9b',
-      ID.unique(),
-      {
-        datetime,
-        userid,
-        reason,
-      }
-    )
-    .then(
-      (response) => {
-        console.log('response', response);
-        alert('Appointment created!');
-      },
-      (error) => {
-        console.log(error);
-        alert('Error creating appointment');
-      }
-    );
-});
-
 export const Modal = component$((props: ModalProps) => {
+  const nav = useNavigate();
+
+  const handleSubmit = $(async (event: QwikSubmitEvent<HTMLFormElement>) => {
+    const form = event.target as HTMLFormElement;
+
+    const userid = (await account.get()).$id;
+    const datetime = new Date(form.date.value);
+    const reason = form.reason.value;
+
+    databases
+      .createDocument(
+        '63bdf02eddbf72fa2abe',
+        '63bdf0455a708734ce9b',
+        ID.unique(),
+        {
+          datetime,
+          userid,
+          reason,
+        }
+      )
+      .then(
+        async (response) => {
+          console.log('response', response);
+          alert('Appointment created!');
+          await nav('/dashboard/');
+        },
+        async (error) => {
+          console.log(error);
+          alert('Error creating appointment');
+          await nav();
+        }
+      );
+  });
+
   return (
     <dialog class={dialogStyle} ref={props.dialogRef}>
       <form method="dialog" class={formStyle} onSubmit$={handleSubmit}>

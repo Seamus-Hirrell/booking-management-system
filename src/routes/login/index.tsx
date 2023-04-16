@@ -1,9 +1,9 @@
-import { component$, $ } from '@builder.io/qwik';
+import { component$, $, type QwikSubmitEvent } from '@builder.io/qwik';
 import { type DocumentHead } from '@builder.io/qwik-city';
 
 import { loginUser } from '~/api';
 
-export const handleSubmit = $((event: Event) => {
+export const handleSubmit = $((event: QwikSubmitEvent<HTMLFormElement>) => {
   const form = event.target as HTMLFormElement;
   const email = form.email.value;
   const password = form.password.value;

@@ -36,7 +36,7 @@ export const Day = component$((props: DayProps) => {
       <div class="drac-box drac-d-flex">
         {hours.map((hour) => {
           return (
-            <div class="drac-box drac-d-flex">
+            <div class="drac-box drac-d-flex" key={hour}>
               {minutes.map((minute) => {
                 const appointment = appointments.find((appointment) => {
                   const appointmentDate = new Date(appointment.datetime);
@@ -47,6 +47,7 @@ export const Day = component$((props: DayProps) => {
                 });
 
                 const dialogRef =
+                  // eslint-disable-next-line qwik/use-method-usage
                   useSignal<HTMLDialogElement>() as Signal<HTMLDialogElement>;
 
                 return (

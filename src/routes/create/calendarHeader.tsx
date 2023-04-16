@@ -17,7 +17,7 @@ export const CalendarHeader = component$(() => {
         return minutes.map((minute) => {
           const time = `${hour}:${minute < 10 ? '0' : ''}${minute}`;
           return (
-            <div class={calendarHeaderSectionStyle}>
+            <div class={calendarHeaderSectionStyle} key={time}>
               {time !== '9:00' ? <div class={dividerStyle} /> : <div />}
               {time}
               {time !== '16:45' ? <div class={dividerStyle} /> : <div />}

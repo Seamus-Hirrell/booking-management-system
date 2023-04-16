@@ -5,7 +5,7 @@ import {
   $,
   useSignal,
 } from '@builder.io/qwik';
-import { type DocumentHead, Link } from '@builder.io/qwik-city';
+import { type DocumentHead, Link, Form } from '@builder.io/qwik-city';
 
 import { ID, Query } from 'appwrite';
 import { account, databases } from '~/api';
@@ -98,7 +98,7 @@ export default component$(() => {
               weekStart={weekStart.value}
               appointments={data.appointments}
             />
-            <form
+            <Form
               class={formStyle}
               preventdefault:submit
               onSubmit$={handleSubmit}
@@ -122,7 +122,7 @@ export default component$(() => {
               <button class="drac-btn drac-bg-purple" type="submit">
                 Create Appointment
               </button>
-            </form>
+            </Form>
             <Link class="drac-btn drac-bg-purple" href="/dashboard">
               Go Back
             </Link>
