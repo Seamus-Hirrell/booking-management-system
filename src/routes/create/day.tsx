@@ -19,8 +19,10 @@ export const Day = component$((props: DayProps) => {
   // filter appointments to only those that are in the current day
   const appointments = props.appointments.filter((appointment) => {
     const appointmentDate = new Date(appointment.datetime);
-    return appointmentDate.getDate() === props.date.getDate();
+    return appointmentDate.getUTCDate() === props.date.getUTCDate();
   });
+
+  console.log(`appointments for ${props.date.toDateString()}`, appointments);
 
   const hours = [9, 10, 11, 12, 13, 14, 15, 16];
   const minutes = [0, 15, 30, 45];
@@ -36,13 +38,16 @@ export const Day = component$((props: DayProps) => {
       <div class="drac-box drac-d-flex">
         {hours.map((hour) => {
           return (
-            <div class="drac-box drac-d-flex" key={props.date.getDate() + hour}>
+            <div
+              class="drac-box drac-d-flex"
+              key={props.date.getUTCDate() + hour}
+            >
               {minutes.map((minute) => {
                 const appointment = appointments.find((appointment) => {
                   const appointmentDate = new Date(appointment.datetime);
                   return (
-                    appointmentDate.getHours() === hour &&
-                    appointmentDate.getMinutes() === minute
+                    appointmentDate.getUTCHours() === hour &&
+                    appointmentDate.getUTCMinutes() === minute
                   );
                 });
 
@@ -51,30 +56,31 @@ export const Day = component$((props: DayProps) => {
                   useSignal<HTMLDialogElement>() as Signal<HTMLDialogElement>;
 
                 return (
-                  <Fragment key={props.date.getDate() + hour + minute}>
+                  <Fragment key={props.date.getUTCDate() + hour + minute}>
                     {appointment ? (
                       <div class={redBoxStyle} key={appointment.$id} />
                     ) : (
-                      <button
-                        onClick$={() => {
-                          dialogRef.value.showModal();
-                        }}
-                        class={greenBoxStyle}
-                        key={props.date.getDate() + hour + minute}
-                      >
+                      <div>
+                        <button
+                          onClick$={() => {
+                            dialogRef.value.showModal();
+                          }}
+                          class={greenBoxStyle}
+                          key={props.date.getDate() + hour + minute}
+                        />
                         <Modal
                           dateTime={
                             new Date(
-                              props.date.getFullYear(),
-                              props.date.getMonth(),
-                              props.date.getDate(),
+                              props.date.getUTCFullYear(),
+                              props.date.getUTCMonth(),
+                              props.date.getUTCDate(),
                               hour,
                               minute
                             )
                           }
                           dialogRef={dialogRef}
                         />
-                      </button>
+                      </div>
                     )}
                   </Fragment>
                 );

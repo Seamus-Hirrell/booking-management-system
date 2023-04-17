@@ -58,10 +58,10 @@ export default component$(() => {
                 {data.appointments.documents.map((appointment: any) => (
                   <tr key={appointment.$id}>
                     <td class="drac-text drac-text-white">
-                      {new Date(appointment.datetime).toLocaleDateString()}
+                      {new Date(appointment.datetime).toDateString()}
                     </td>
                     <td class="drac-text drac-text-white">
-                      {new Date(appointment.datetime).toLocaleTimeString()}
+                      {new Date(appointment.datetime).toTimeString()}
                     </td>
                     <td class="drac-text drac-text-white">15 minutes</td>
                   </tr>

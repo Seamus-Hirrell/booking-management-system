@@ -17,11 +17,13 @@ import { WeekSelector } from './weekSelector';
 export default component$(() => {
   const weekStart = useSignal(
     new Date(
-      new Date().getFullYear(),
-      new Date().getMonth(),
-      new Date().getDate() - new Date().getDay() + 1
+      new Date().getUTCFullYear(),
+      new Date().getUTCMonth(),
+      new Date().getUTCDate() - new Date().getUTCDay() + 1
     )
   );
+
+  console.log('weekStart', weekStart.value);
 
   const userData = useResource$(async () => {
     const user = await account.get();
