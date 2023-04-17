@@ -4,7 +4,7 @@ Each day begins at 9am and ends at 5pm.
 Each day is a row that contains 32 15 minute intervals.
 */
 
-import { component$, useSignal, type Signal } from '@builder.io/qwik';
+import { component$, useSignal, type Signal, Fragment } from '@builder.io/qwik';
 import type { Models } from 'appwrite';
 import { Modal } from './modal';
 
@@ -36,7 +36,7 @@ export const Day = component$((props: DayProps) => {
       <div class="drac-box drac-d-flex">
         {hours.map((hour) => {
           return (
-            <div class="drac-box drac-d-flex" key={hour}>
+            <div class="drac-box drac-d-flex" key={props.date.getDate() + hour}>
               {minutes.map((minute) => {
                 const appointment = appointments.find((appointment) => {
                   const appointmentDate = new Date(appointment.datetime);
@@ -51,9 +51,9 @@ export const Day = component$((props: DayProps) => {
                   useSignal<HTMLDialogElement>() as Signal<HTMLDialogElement>;
 
                 return (
-                  <>
+                  <Fragment key={props.date.getDate() + hour + minute}>
                     {appointment ? (
-                      <div class={redBoxStyle} />
+                      <div class={redBoxStyle} key={appointment.$id} />
                     ) : (
                       <>
                         <button
@@ -61,6 +61,7 @@ export const Day = component$((props: DayProps) => {
                             dialogRef.value.showModal();
                           }}
                           class={greenBoxStyle}
+                          key={props.date.getDate() + hour + minute}
                         />
                         <Modal
                           dateTime={
@@ -76,7 +77,7 @@ export const Day = component$((props: DayProps) => {
                         />
                       </>
                     )}
-                  </>
+                  </Fragment>
                 );
               })}
             </div>

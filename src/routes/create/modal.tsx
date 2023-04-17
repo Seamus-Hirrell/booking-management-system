@@ -23,37 +23,37 @@ interface ModalProps {
 export const Modal = component$((props: ModalProps) => {
   const nav = useNavigate();
 
-  const handleSubmit = $(async (event: QwikSubmitEvent<HTMLFormElement>) => {
-    const form = event.target as HTMLFormElement;
+  const handleSubmit = $(
+    async (event: QwikSubmitEvent<HTMLFormElement>, form: HTMLFormElement) => {
+      const userid = (await account.get()).$id;
+      const datetime = new Date(form.date.value);
+      const reason = form.reason.value;
 
-    const userid = (await account.get()).$id;
-    const datetime = new Date(form.date.value);
-    const reason = form.reason.value;
-
-    databases
-      .createDocument(
-        '63bdf02eddbf72fa2abe',
-        '63bdf0455a708734ce9b',
-        ID.unique(),
-        {
-          datetime,
-          userid,
-          reason,
-        }
-      )
-      .then(
-        async (response) => {
-          console.log('response', response);
-          alert('Appointment created!');
-          await nav('/dashboard/');
-        },
-        async (error) => {
-          console.log(error);
-          alert('Error creating appointment');
-          await nav();
-        }
-      );
-  });
+      databases
+        .createDocument(
+          '63bdf02eddbf72fa2abe',
+          '63bdf0455a708734ce9b',
+          ID.unique(),
+          {
+            datetime,
+            userid,
+            reason,
+          }
+        )
+        .then(
+          async (response) => {
+            console.log('response', response);
+            alert('Appointment created!');
+            await nav('/dashboard/');
+          },
+          async (error) => {
+            console.log(error);
+            alert('Error creating appointment');
+            await nav();
+          }
+        );
+    }
+  );
 
   return (
     <dialog class={dialogStyle} ref={props.dialogRef}>
@@ -69,10 +69,16 @@ export const Modal = component$((props: ModalProps) => {
         <textarea id="reason" name="reason" />
         <hr class="drac-divider drac-w-full" />
         <span class={buttonContainerStyle}>
-          <button value="cancel" class="drac-btn drac-bg-purple">
+          <button
+            type="button"
+            class="drac-btn drac-bg-purple"
+            onClick$={() => {
+              props.dialogRef.value.close();
+            }}
+          >
             Cancel
           </button>
-          <button value="default" class="drac-btn drac-bg-purple">
+          <button type="submit" class="drac-btn drac-bg-purple">
             Confirm
           </button>
         </span>
