@@ -98,11 +98,7 @@ export default component$(() => {
               weekStart={weekStart.value}
               appointments={data.appointments}
             />
-            <Form
-              class={formStyle}
-              preventdefault:submit
-              onSubmit$={handleSubmit}
-            >
+            <Form class={formStyle} onSubmit$={handleSubmit}>
               <label for="date" class="drac-text drac-text-white">
                 Date
               </label>
