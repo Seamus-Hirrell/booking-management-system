@@ -55,14 +55,13 @@ export const Day = component$((props: DayProps) => {
                     {appointment ? (
                       <div class={redBoxStyle} key={appointment.$id} />
                     ) : (
-                      <>
-                        <button
-                          onClick$={() => {
-                            dialogRef.value.showModal();
-                          }}
-                          class={greenBoxStyle}
-                          key={props.date.getDate() + hour + minute}
-                        />
+                      <button
+                        onClick$={() => {
+                          dialogRef.value.showModal();
+                        }}
+                        class={greenBoxStyle}
+                        key={props.date.getDate() + hour + minute}
+                      >
                         <Modal
                           dateTime={
                             new Date(
@@ -75,7 +74,7 @@ export const Day = component$((props: DayProps) => {
                           }
                           dialogRef={dialogRef}
                         />
-                      </>
+                      </button>
                     )}
                   </Fragment>
                 );
