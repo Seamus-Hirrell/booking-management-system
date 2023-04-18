@@ -30,7 +30,13 @@ export const boxStyle = style([
 ]);
 
 // red box style
-export const redBoxStyle = style(['drac-bg-red', boxStyle]);
+export const redBoxStyle = style([
+  'drac-bg-red',
+  boxStyle,
+  {
+    marginTop: '2px',
+  },
+]);
 
 // green box style
 export const greenBoxStyle = style(['drac-bg-green', 'drac-btn', boxStyle]);
