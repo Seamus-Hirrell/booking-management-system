@@ -1,16 +1,33 @@
-import { component$, $, type QwikSubmitEvent } from '@builder.io/qwik';
-import { type DocumentHead } from '@builder.io/qwik-city';
+import { component$, $ } from '@builder.io/qwik';
+import type { QwikSubmitEvent } from '@builder.io/qwik';
+import { useNavigate } from '@builder.io/qwik-city';
+import type { DocumentHead } from '@builder.io/qwik-city';
 
-import { loginUser } from '~/api';
-
-export const handleSubmit = $((event: QwikSubmitEvent<HTMLFormElement>) => {
-  const form = event.target as HTMLFormElement;
-  const email = form.email.value;
-  const password = form.password.value;
-  loginUser(email, password);
-});
+import { account } from '~/api';
 
 export default component$(() => {
+  const nav = useNavigate();
+
+  const loginUser = $((email: string, password: string) => {
+    account.createEmailSession(email, password).then(
+      (response) => {
+        console.log(response);
+        nav('/dashboard');
+      },
+      (error) => {
+        console.log(error);
+        alert('Invalid email or password');
+      }
+    );
+  });
+
+  const handleSubmit = $((event: QwikSubmitEvent<HTMLFormElement>) => {
+    const form = event.target as HTMLFormElement;
+    const email = form.email.value;
+    const password = form.password.value;
+    loginUser(email, password);
+  });
+
   return (
     <div
       class="drac-box drac-d-flex"
