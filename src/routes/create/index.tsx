@@ -7,7 +7,7 @@ import {
 } from '@builder.io/qwik';
 import { type DocumentHead, Link, Form } from '@builder.io/qwik-city';
 
-import { ID, Query } from 'appwrite';
+import { ID } from 'appwrite';
 import { account, databases } from '~/api';
 
 import { formStyle } from './styles.css';
@@ -30,8 +30,7 @@ export default component$(() => {
 
     const appointments = await databases.listDocuments(
       '63bdf02eddbf72fa2abe',
-      '6445c1894a6cda3aa31b',
-      [Query.equal('userid', user.$id)]
+      '6445c1894a6cda3aa31b'
     );
 
     return {
