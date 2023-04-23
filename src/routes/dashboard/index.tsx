@@ -1,6 +1,5 @@
 import { component$, Resource, useResource$, $ } from '@builder.io/qwik';
 import { type DocumentHead, Link } from '@builder.io/qwik-city';
-import { Query } from 'appwrite';
 
 import { account, databases } from '~/api';
 
@@ -8,11 +7,14 @@ export default component$(() => {
   const userData = useResource$(async () => {
     const user = await account.get();
 
+    console.log('user', user);
+
     const appointments = await databases.listDocuments(
       '63bdf02eddbf72fa2abe',
-      '63bdf0455a708734ce9b',
-      [Query.equal('userid', user.$id)]
+      '6445c1894a6cda3aa31b'
     );
+
+    console.log('appointments', appointments);
 
     // filter appointments to only those that are owned by the user
     appointments.documents = appointments.documents.filter(
@@ -38,7 +40,7 @@ export default component$(() => {
   const deleteAppointment = $(async (id: string) => {
     await databases.deleteDocument(
       '63bdf02eddbf72fa2abe',
-      '63bdf0455a708734ce9b',
+      '6445c1894a6cda3aa31b',
       id
     );
   });

@@ -19,10 +19,13 @@ export const Day = component$((props: DayProps) => {
   // filter appointments to only those that are in the current day
   const appointments = props.appointments.filter((appointment) => {
     const appointmentDate = new Date(appointment.datetime);
-    return appointmentDate.getUTCDate() === props.date.getUTCDate();
+    return appointmentDate.getDate() === props.date.getDate();
   });
 
-  console.log(`appointments for ${props.date.toDateString()}`, appointments);
+  console.log(
+    `appointments for ${props.date.toLocaleDateString()}`,
+    appointments
+  );
 
   const hours = [9, 10, 11, 12, 13, 14, 15, 16];
   const minutes = [0, 15, 30, 45];
@@ -38,16 +41,13 @@ export const Day = component$((props: DayProps) => {
       <div class="drac-box drac-d-flex">
         {hours.map((hour) => {
           return (
-            <div
-              class="drac-box drac-d-flex"
-              key={props.date.getUTCDate() + hour}
-            >
+            <div class="drac-box drac-d-flex" key={props.date.getDate() + hour}>
               {minutes.map((minute) => {
                 const appointment = appointments.find((appointment) => {
                   const appointmentDate = new Date(appointment.datetime);
                   return (
-                    appointmentDate.getUTCHours() === hour &&
-                    appointmentDate.getUTCMinutes() === minute
+                    appointmentDate.getHours() === hour &&
+                    appointmentDate.getMinutes() === minute
                   );
                 });
 
@@ -56,7 +56,7 @@ export const Day = component$((props: DayProps) => {
                   useSignal<HTMLDialogElement>() as Signal<HTMLDialogElement>;
 
                 return (
-                  <Fragment key={props.date.getUTCDate() + hour + minute}>
+                  <Fragment key={props.date.getDate() + hour + minute}>
                     {appointment ? (
                       <div class={redBoxStyle} key={appointment.$id} />
                     ) : (
@@ -71,9 +71,9 @@ export const Day = component$((props: DayProps) => {
                         <Modal
                           dateTime={
                             new Date(
-                              props.date.getUTCFullYear(),
-                              props.date.getUTCMonth(),
-                              props.date.getUTCDate(),
+                              props.date.getFullYear(),
+                              props.date.getMonth(),
+                              props.date.getDate(),
                               hour,
                               minute
                             )

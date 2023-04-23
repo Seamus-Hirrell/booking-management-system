@@ -32,7 +32,7 @@ export const Modal = component$((props: ModalProps) => {
       databases
         .createDocument(
           '63bdf02eddbf72fa2abe',
-          '63bdf0455a708734ce9b',
+          '6445c1894a6cda3aa31b',
           ID.unique(),
           {
             datetime,

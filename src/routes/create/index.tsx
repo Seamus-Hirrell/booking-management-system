@@ -17,9 +17,9 @@ import { WeekSelector } from './weekSelector';
 export default component$(() => {
   const weekStart = useSignal(
     new Date(
-      new Date().getUTCFullYear(),
-      new Date().getUTCMonth(),
-      new Date().getUTCDate() - new Date().getUTCDay() + 1
+      new Date().getFullYear(),
+      new Date().getMonth(),
+      new Date().getDate() - new Date().getDay() + 1
     )
   );
 
@@ -30,7 +30,7 @@ export default component$(() => {
 
     const appointments = await databases.listDocuments(
       '63bdf02eddbf72fa2abe',
-      '63bdf0455a708734ce9b',
+      '6445c1894a6cda3aa31b',
       [Query.equal('userid', user.$id)]
     );
 
@@ -64,7 +64,7 @@ export default component$(() => {
 
     databases.createDocument(
       '63bdf02eddbf72fa2abe',
-      '63bdf0455a708734ce9b',
+      '6445c1894a6cda3aa31b',
       ID.unique(),
       {
         datetime,

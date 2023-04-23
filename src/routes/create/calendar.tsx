@@ -21,9 +21,9 @@ export const Calendar = component$((props: CalendarProps) => {
   const appointments = props.appointments.documents.filter((appointment) => {
     const appointmentDate = new Date(appointment.datetime);
     const appointmentWeekStart = new Date(
-      appointmentDate.getUTCFullYear(),
-      appointmentDate.getUTCMonth(),
-      appointmentDate.getUTCDate() - appointmentDate.getUTCDay() + 1
+      appointmentDate.getFullYear(),
+      appointmentDate.getMonth(),
+      appointmentDate.getDate() - appointmentDate.getDay() + 1
     );
 
     return appointmentWeekStart.getTime() === props.weekStart.getTime();
