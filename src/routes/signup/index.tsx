@@ -1,71 +1,110 @@
-import { component$, $, type QwikSubmitEvent } from '@builder.io/qwik';
-import { type DocumentHead } from '@builder.io/qwik-city';
+import { component$, $ } from '@builder.io/qwik';
+import type { QwikSubmitEvent } from '@builder.io/qwik';
 
-import { registerUser } from '~/api';
-import { boxStyle } from './styles.css';
+import { useNavigate } from '@builder.io/qwik-city';
+import type { DocumentHead } from '@builder.io/qwik-city';
 
-export const handleSubmit = $((event: QwikSubmitEvent<HTMLFormElement>) => {
-  const form = event.target as HTMLFormElement;
-  const email = form.email.value;
-  const password = form.password.value;
-  const name = form.fullName.value;
-  registerUser(email, password, name);
-});
+import { ID } from 'appwrite';
+
+import { account } from '~/api';
+import {
+  formContainerStyle,
+  formStyle,
+  inputStyle,
+  labelStyle,
+} from '~/styles/form_styles.css';
 
 export default component$(() => {
+  const handleSubmit = $((event: QwikSubmitEvent<HTMLFormElement>) => {
+    const form = event.target as HTMLFormElement;
+    const password = form.password.value;
+    const confirmPassword = form.confirmPassword.value;
+
+    if (password !== confirmPassword) {
+      alert('Passwords do not match');
+      return;
+    }
+
+    const email = form.email.value;
+    const name = form.fullName.value;
+
+    registerUser(email, password, name);
+  });
+
+  const nav = useNavigate();
+  const registerUser = $((email: string, password: string, name: string) => {
+    account.create(ID.unique(), email, password, name).then(
+      (response) => {
+        console.log(response);
+        nav('/dashboard');
+      },
+      (error) => {
+        console.log(error);
+        alert('Invalid email or password');
+      }
+    );
+  });
+
   return (
-    <div class={boxStyle}>
+    <div class={formContainerStyle}>
       <h2 class="drac-heading drac-heading-xl drac-text-white">
         Create Account
       </h2>
-      <form preventdefault:submit onSubmit$={handleSubmit} class={boxStyle}>
-        <label for="email" class="drac-text drac-line-height drac-text-white">
-          Email
-        </label>
-        <input
-          type="email"
-          name="email"
-          class="drac-input drac-input-green drac-text-green drac-input-outline"
-        />
-
-        <label
-          for="password"
-          class="drac-text drac-line-height drac-text-white"
-        >
-          Password
-        </label>
-        <input
-          type="password"
-          name="password"
-          class="drac-input drac-input-green drac-text-green drac-input-outline"
-        />
-
-        <label
-          for="confirmPassword"
-          class="drac-text drac-line-height drac-text-white"
-        >
-          Confirm Password
-        </label>
-        <input
-          type="password"
-          name="confirmPassword"
-          class="drac-input drac-input-green drac-text-green drac-input-outline"
-        />
-
-        <label
-          for="fullName"
-          class="drac-text drac-line-height drac-text-white"
-        >
+      <form preventdefault:submit onSubmit$={handleSubmit} class={formStyle}>
+        <label for="fullName" class={labelStyle}>
           Name
         </label>
         <input
-          type="text"
           name="fullName"
-          class="drac-input drac-input-green drac-text-green drac-input-outline"
+          type="text"
+          placeholder="name"
+          required
+          class={inputStyle}
         />
 
-        <button type="submit" class="drac-btn drac-bg-white">
-          Submit
+        <label for="email" class={labelStyle}>
+          Email
+        </label>
+        <input
+          placeholder="email"
+          name="email"
+          type="email"
+          class={inputStyle}
+          required
+        />
+
+        <label for="password" class={labelStyle}>
+          Password
+        </label>
+        <input
+          name="password"
+          placeholder="password"
+          type="password"
+          class={inputStyle}
+          required
+          pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+        />
+
+        <label for="confirmPassword" class={labelStyle}>
+          Confirm Password
+        </label>
+        <input
+          name="confirmPassword"
+          placeholder="password"
+          type="password"
+          class={inputStyle}
+          required
+          pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+        />
+
+        <span class="drac-text drac-text-white drac-line-height">
+          Password must be at least 8 characters long and contain at least one
+          lowercase letter, one uppercase letter, one numeric digit, and one
+          special character.
+        </span>
+
+        <button type="submit" class="drac-btn drac-bg-white drac-mt-sm">
+          Create Account
         </button>
       </form>
     </div>

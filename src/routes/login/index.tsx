@@ -1,13 +1,28 @@
 import { component$, $ } from '@builder.io/qwik';
 import type { QwikSubmitEvent } from '@builder.io/qwik';
+
 import { useNavigate } from '@builder.io/qwik-city';
 import type { DocumentHead } from '@builder.io/qwik-city';
 
 import { account } from '~/api';
+import {
+  formContainerStyle,
+  formStyle,
+  inputStyle,
+  labelStyle,
+} from '~/styles/form_styles.css';
 
 export default component$(() => {
-  const nav = useNavigate();
+  const handleSubmit = $((event: QwikSubmitEvent<HTMLFormElement>) => {
+    const form = event.target as HTMLFormElement;
 
+    const email = form.email.value;
+    const password = form.password.value;
+
+    loginUser(email, password);
+  });
+
+  const nav = useNavigate();
   const loginUser = $((email: string, password: string) => {
     account.createEmailSession(email, password).then(
       (response) => {
@@ -21,45 +36,37 @@ export default component$(() => {
     );
   });
 
-  const handleSubmit = $((event: QwikSubmitEvent<HTMLFormElement>) => {
-    const form = event.target as HTMLFormElement;
-    const email = form.email.value;
-    const password = form.password.value;
-    loginUser(email, password);
-  });
-
   return (
-    <div
-      class="drac-box drac-d-flex"
-      style="flex-direction: column; align-items: center;"
-    >
-      <span class="drac-text drac-line-height drac-text-white">Log In</span>
-      <form
-        preventdefault:submit
-        onSubmit$={handleSubmit}
-        class="drac-box drac-d-flex"
-        style="flex-direction: column; gap: 10px;"
-      >
-        <label for="email" class="drac-text drac-line-height drac-text-white">
+    <div class={formContainerStyle}>
+      <h2 class="drac-heading drac-heading-xl drac-text-white">Log In</h2>
+      <form preventdefault:submit onSubmit$={handleSubmit} class={formStyle}>
+        <label for="email" class={labelStyle}>
           Email
         </label>
         <input
           placeholder="email"
           name="email"
-          class="drac-input drac-input-green drac-text-green drac-input-outline"
+          type="email"
+          class={inputStyle}
+          required
         />
-        <label
-          for="password"
-          class="drac-text drac-line-height drac-text-white"
-        >
+        <label for="password" class={labelStyle}>
           Password
         </label>
         <input
-          type="password"
+          placeholder="password"
           name="password"
-          class="drac-input drac-input-green drac-text-green drac-input-outline"
+          type="password"
+          class={inputStyle}
+          required
+          pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
         />
-        <button type="submit" class="drac-btn drac-bg-white">
+        <span class="drac-text drac-text-white drac-line-height">
+          Password must be at least 8 characters long and contain at least one
+          lowercase letter, one uppercase letter, one numeric digit, and one
+          special character.
+        </span>
+        <button type="submit" class="drac-btn drac-bg-white drac-mt-sm">
           Log In
         </button>
       </form>
