@@ -2,8 +2,6 @@
 
 ## To-Do List
 
-- user feedback after wrong or no input
-- make dashboard and create pages accessible only after logging in
 - implement admin view
 - add images to and prettify home page
 - add contact info and picture of hospital to about page

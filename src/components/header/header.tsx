@@ -1,8 +1,11 @@
-import { component$ } from '@builder.io/qwik';
+import { component$, useContext } from '@builder.io/qwik';
 import { Link, useLocation } from '@builder.io/qwik-city';
+
+import { isLoggedInContext } from '~/root';
 
 export default component$(() => {
   const loc = useLocation();
+  const isLoggedIn = useContext(isLoggedInContext);
 
   return (
     <header
@@ -16,33 +19,14 @@ export default component$(() => {
         <li
           class={{
             'drac-tab': true,
-            'drac-tab-active': loc.url.pathname === '/login/',
+            'drac-tab-active': loc.url.pathname === '/',
           }}
         >
-          <Link class="drac-tab-link drac-text" href="/login">
-            Log In
+          <Link class="drac-tab-link drac-text" href="/">
+            Home
           </Link>
         </li>
-        <li
-          class={{
-            'drac-tab': true,
-            'drac-tab-active': loc.url.pathname === '/signup/',
-          }}
-        >
-          <Link class="drac-tab-link drac-text" href="/signup">
-            Sign Up
-          </Link>
-        </li>
-        <li
-          class={{
-            'drac-tab': true,
-            'drac-tab-active': loc.url.pathname === '/dashboard/',
-          }}
-        >
-          <Link class="drac-tab-link drac-text" href="/dashboard">
-            Dashboard
-          </Link>
-        </li>
+
         <li
           class={{
             'drac-tab': true,
@@ -53,16 +37,71 @@ export default component$(() => {
             About
           </Link>
         </li>
-        <li
-          class={{
-            'drac-tab': true,
-            'drac-tab-active': loc.url.pathname === '/create/',
-          }}
-        >
-          <Link class="drac-tab-link drac-text" href="/create">
-            Create
-          </Link>
-        </li>
+
+        {!isLoggedIn.value && (
+          <li
+            class={{
+              'drac-tab': true,
+              'drac-tab-active': loc.url.pathname === '/login/',
+            }}
+          >
+            <Link class="drac-tab-link drac-text" href="/login">
+              Log In
+            </Link>
+          </li>
+        )}
+
+        {!isLoggedIn.value && (
+          <li
+            class={{
+              'drac-tab': true,
+              'drac-tab-active': loc.url.pathname === '/signup/',
+            }}
+          >
+            <Link class="drac-tab-link drac-text" href="/signup">
+              Sign Up
+            </Link>
+          </li>
+        )}
+
+        {isLoggedIn.value && (
+          <li
+            class={{
+              'drac-tab': true,
+              'drac-tab-active': loc.url.pathname === '/dashboard/',
+            }}
+          >
+            <Link class="drac-tab-link drac-text" href="/dashboard">
+              Dashboard
+            </Link>
+          </li>
+        )}
+
+        {isLoggedIn.value && (
+          <li
+            class={{
+              'drac-tab': true,
+              'drac-tab-active': loc.url.pathname === '/create/',
+            }}
+          >
+            <Link class="drac-tab-link drac-text" href="/create">
+              Create
+            </Link>
+          </li>
+        )}
+
+        {isLoggedIn.value && (
+          <li
+            class={{
+              'drac-tab': true,
+              'drac-tab-active': loc.url.pathname === '/logout/',
+            }}
+          >
+            <Link class="drac-tab-link drac-text" href="/logout">
+              Log Out
+            </Link>
+          </li>
+        )}
       </ul>
     </header>
   );

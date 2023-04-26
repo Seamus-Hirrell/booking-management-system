@@ -1,4 +1,4 @@
-import { component$, $ } from '@builder.io/qwik';
+import { component$, $, useContext } from '@builder.io/qwik';
 import type { QwikSubmitEvent } from '@builder.io/qwik';
 
 import { useNavigate } from '@builder.io/qwik-city';
@@ -7,6 +7,7 @@ import type { DocumentHead } from '@builder.io/qwik-city';
 import { ID } from 'appwrite';
 
 import { account } from '~/api';
+import { isLoggedInContext } from '~/root';
 import {
   formContainerStyle,
   formStyle,
@@ -15,6 +16,23 @@ import {
 } from '~/styles/form_styles.css';
 
 export default component$(() => {
+  const nav = useNavigate();
+  const isLoggedIn = useContext(isLoggedInContext);
+  const registerUser = $((email: string, password: string, name: string) => {
+    account.create(ID.unique(), email, password, name).then(
+      (response) => {
+        console.log(response);
+        isLoggedIn.value = false;
+        alert('Account created successfully!');
+        nav('/login/');
+      },
+      (error) => {
+        console.log(error);
+        alert('Invalid email or password');
+      }
+    );
+  });
+
   const handleSubmit = $((event: QwikSubmitEvent<HTMLFormElement>) => {
     const form = event.target as HTMLFormElement;
     const password = form.password.value;
@@ -29,20 +47,6 @@ export default component$(() => {
     const name = form.fullName.value;
 
     registerUser(email, password, name);
-  });
-
-  const nav = useNavigate();
-  const registerUser = $((email: string, password: string, name: string) => {
-    account.create(ID.unique(), email, password, name).then(
-      (response) => {
-        console.log(response);
-        nav('/dashboard');
-      },
-      (error) => {
-        console.log(error);
-        alert('Invalid email or password');
-      }
-    );
   });
 
   return (
