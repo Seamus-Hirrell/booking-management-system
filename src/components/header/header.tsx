@@ -73,6 +73,16 @@ export default component$(() => {
             Create
           </Link>
         </li>
+        <li
+          class={{
+            'drac-tab': true,
+            'drac-tab-active': loc.url.pathname === '/logout/',
+          }}
+        >
+          <Link class="drac-tab-link drac-text" href="/logout">
+            Log Out
+          </Link>
+        </li>
       </ul>
     </header>
   );
