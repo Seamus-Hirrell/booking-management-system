@@ -1,12 +1,15 @@
-import { $, component$ } from '@builder.io/qwik';
+import { $, component$, useContext } from '@builder.io/qwik';
 import type { DocumentHead } from '@builder.io/qwik-city';
 
 import { account } from '~/api';
+import { isLoggedInContext } from '~/root';
 import { formContainerStyle } from '~/styles/form_styles.css';
 
 export default component$(() => {
+  const isLoggedIn = useContext(isLoggedInContext);
   const logoutUser = $(async () => {
     await account.deleteSessions();
+    isLoggedIn.value = false;
     window.location.href = '/';
   });
 

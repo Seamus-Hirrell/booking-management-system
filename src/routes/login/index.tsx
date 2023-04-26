@@ -1,10 +1,11 @@
-import { component$, $ } from '@builder.io/qwik';
+import { component$, $, useContext } from '@builder.io/qwik';
 import type { QwikSubmitEvent } from '@builder.io/qwik';
 
 import { useNavigate } from '@builder.io/qwik-city';
 import type { DocumentHead } from '@builder.io/qwik-city';
 
 import { account } from '~/api';
+import { isLoggedInContext } from '~/root';
 import {
   formContainerStyle,
   formStyle,
@@ -13,20 +14,13 @@ import {
 } from '~/styles/form_styles.css';
 
 export default component$(() => {
-  const handleSubmit = $((event: QwikSubmitEvent<HTMLFormElement>) => {
-    const form = event.target as HTMLFormElement;
-
-    const email = form.email.value;
-    const password = form.password.value;
-
-    loginUser(email, password);
-  });
-
   const nav = useNavigate();
+  const isLoggedIn = useContext(isLoggedInContext);
   const loginUser = $((email: string, password: string) => {
     account.createEmailSession(email, password).then(
       (response) => {
         console.log(response);
+        isLoggedIn.value = true;
         nav('/dashboard');
       },
       (error) => {
@@ -34,6 +28,15 @@ export default component$(() => {
         alert('Invalid email or password');
       }
     );
+  });
+
+  const handleSubmit = $((event: QwikSubmitEvent<HTMLFormElement>) => {
+    const form = event.target as HTMLFormElement;
+
+    const email = form.email.value;
+    const password = form.password.value;
+
+    loginUser(email, password);
   });
 
   return (
