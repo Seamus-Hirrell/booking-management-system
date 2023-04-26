@@ -16,6 +16,16 @@ export default component$(() => {
         <li
           class={{
             'drac-tab': true,
+            'drac-tab-active': loc.url.pathname === '/',
+          }}
+        >
+          <Link class="drac-tab-link drac-text" href="/">
+            Home
+          </Link>
+        </li>
+        <li
+          class={{
+            'drac-tab': true,
             'drac-tab-active': loc.url.pathname === '/login/',
           }}
         >
