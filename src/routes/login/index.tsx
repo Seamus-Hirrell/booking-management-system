@@ -4,8 +4,8 @@ import type { QwikSubmitEvent } from '@builder.io/qwik';
 import { useNavigate } from '@builder.io/qwik-city';
 import type { DocumentHead } from '@builder.io/qwik-city';
 
-import { account } from '~/api';
-import { isLoggedInContext } from '~/root';
+import { account, teams } from '~/api';
+import { isAdminContext, isLoggedInContext } from '~/root';
 import {
   formContainerStyle,
   formStyle,
@@ -14,17 +14,30 @@ import {
 } from '~/styles/form_styles.css';
 
 export default component$(() => {
-  const nav = useNavigate();
   const isLoggedIn = useContext(isLoggedInContext);
+  const isAdmin = useContext(isAdminContext);
+
+  const nav = useNavigate();
   const loginUser = $((email: string, password: string) => {
     account.createEmailSession(email, password).then(
       (response) => {
-        console.log(response);
+        console.log('logged in', response);
         isLoggedIn.value = true;
-        nav('/dashboard');
+
+        teams.listMemberships('63ec03ceab377335c31b').then(
+          (response) => {
+            console.log('list of memberships of admin team', response);
+            isAdmin.value = true;
+            nav('/admin');
+          },
+          (error) => {
+            console.log('user is not an admin', error);
+            nav('/dashboard');
+          }
+        );
       },
       (error) => {
-        console.log(error);
+        console.log('error when trying to log in', error);
         alert('Invalid email or password');
       }
     );

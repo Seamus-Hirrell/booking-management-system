@@ -16,6 +16,7 @@ import { RouterHead } from './components/router-head/router-head';
 import 'dracula-ui/styles/dracula-ui.css';
 
 export const isLoggedInContext = createContextId<Signal<boolean>>('isLoggedIn');
+export const isAdminContext = createContextId<Signal<boolean>>('isAdmin');
 
 export default component$(() => {
   /**
@@ -27,6 +28,9 @@ export default component$(() => {
 
   const isLoggedIn = useSignal(false);
   useContextProvider(isLoggedInContext, isLoggedIn);
+
+  const isAdmin = useSignal(false);
+  useContextProvider(isAdminContext, isAdmin);
 
   return (
     <QwikCityProvider>
