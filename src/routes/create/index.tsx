@@ -92,7 +92,7 @@ export default component$(() => {
         onResolved={(data) => (
           <>
             <span class="drac-text drac-line-height drac-text-white">
-              Welcome {data.user.email}
+              Welcome {data.user.name}
             </span>
             <WeekSelector weekStart={weekStart} />
             <Calendar

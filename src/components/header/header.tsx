@@ -1,11 +1,12 @@
 import { component$, useContext } from '@builder.io/qwik';
 import { Link, useLocation } from '@builder.io/qwik-city';
 
-import { isLoggedInContext } from '~/root';
+import { isAdminContext, isLoggedInContext } from '~/root';
 
 export default component$(() => {
   const loc = useLocation();
   const isLoggedIn = useContext(isLoggedInContext);
+  const isAdmin = useContext(isAdminContext);
 
   return (
     <header
@@ -64,7 +65,7 @@ export default component$(() => {
           </li>
         )}
 
-        {isLoggedIn.value && (
+        {isLoggedIn.value && !isAdmin.value && (
           <li
             class={{
               'drac-tab': true,
@@ -77,7 +78,7 @@ export default component$(() => {
           </li>
         )}
 
-        {isLoggedIn.value && (
+        {isLoggedIn.value && !isAdmin.value && (
           <li
             class={{
               'drac-tab': true,
@@ -86,6 +87,19 @@ export default component$(() => {
           >
             <Link class="drac-tab-link drac-text" href="/create">
               Create
+            </Link>
+          </li>
+        )}
+
+        {isAdmin.value && (
+          <li
+            class={{
+              'drac-tab': true,
+              'drac-tab-active': loc.url.pathname === '/admin/',
+            }}
+          >
+            <Link class="drac-tab-link drac-text" href="/admin">
+              Admin
             </Link>
           </li>
         )}
