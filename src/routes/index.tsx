@@ -2,7 +2,7 @@ import { component$ } from '@builder.io/qwik';
 import type { DocumentHead } from '@builder.io/qwik-city';
 
 import { divStyle, spanStyle } from '~/styles/general_styles.css';
-import photo from '~/images/photo.png';
+import photo from '~/images/photo.jpg';
 
 export default component$(() => {
   return (
