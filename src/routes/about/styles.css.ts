@@ -1,17 +1,23 @@
 import { style } from 'styled-vanilla-extract/qwik';
-import { globalStyle } from '@vanilla-extract/css';
 
-export const aboutStyle = style([
+export const contactStyle = style([
   'drac-box',
   'drac-d-flex',
-  'drac-mx-auto',
+  'drac-w-md',
   {
     'flex-direction': 'column',
-    'align-items': 'center',
-    'max-width': '800px',
+    'align-items': 'flex-start',
+    gap: '1rem',
   },
 ]);
 
-export const paragraphStyle = globalStyle('p', {
-  textAlign: 'justify',
-});
+export const contactContainerStyle = style([
+  'drac-box',
+  'drac-d-flex',
+  'drac-w-auto',
+  {
+    'flex-direction': 'row',
+    'align-items': 'space-between',
+    gap: '1rem',
+  },
+]);
