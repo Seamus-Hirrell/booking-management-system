@@ -2,7 +2,7 @@ import { component$, Resource, useResource$, $ } from '@builder.io/qwik';
 import type { DocumentHead } from '@builder.io/qwik-city';
 
 import { account, databases } from '~/api';
-import { divStyle, tdStyle } from './styles.css';
+import { divStyle, tdStyle } from '~/styles/general_styles.css';
 
 export default component$(() => {
   const userData = useResource$(async () => {

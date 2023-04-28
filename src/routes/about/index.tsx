@@ -1,53 +1,50 @@
 import { component$ } from '@builder.io/qwik';
-import { type DocumentHead } from '@builder.io/qwik-city';
+import type { DocumentHead } from '@builder.io/qwik-city';
 
-import { aboutStyle } from './styles.css';
+import {
+  divStyle,
+  dividerStyle,
+  spanStyle,
+  verticalDividerStyle,
+} from '~/styles/general_styles.css';
+import { contactContainerStyle, contactStyle } from './styles.css';
+
+import logo from '~/images/logo.jpg';
 
 export default component$(() => {
   return (
-    <div class={aboutStyle}>
-      <h1 class="drac-heading drac-heading-2xl drac-text-white">About</h1>
-      <span>
-        <h2 class="drac-heading drac-heading-xl drac-text-white">
-          What is this project?
-        </h2>
-        <p class="drac-text drac-line-height drac-text-white">
-          This is a booking management system for a GP practice. It allows
-          patients to book appointments with their doctor or nurse, and also
-          allows doctors to manage their appointments.
-        </p>
-        <h2 class="drac-heading drac-heading-xl drac-text-white">
-          What is the purpose of this project?
-        </h2>
-        <p class="drac-text drac-line-height drac-text-white">
-          For many GP practices, the only way to book an appointment is to call
-          by phone, which is not very convenient. This project aims to make it
-          easier for patients to book appointments, and also for doctors to
-          manage their appointments. This is done through a web app, which
-          allows patients to book appointments online, and allows doctors to
-          manage their appointments online.
-        </p>
-        <h2 class="drac-heading drac-heading-xl drac-text-white">
-          What technologies were used?
-        </h2>
-        <p class="drac-text drac-line-height drac-text-white">
-          The frontend website was made using the
-          <b class="drac-text-purple"> Qwik </b> web framework. The backend was
-          made using <b class="drac-text-red"> Appwrite</b>, which handles
-          authentication and databases.
-        </p>
-        <h2 class="drac-heading drac-heading-xl drac-text-white">
-          How is it deployed?
-        </h2>
-        <p class="drac-text drac-line-height drac-text-white">
-          The website is deployed using
-          <b class="drac-text-orange"> Cloudflare Pages</b>. Each time a commit
-          is pushed to the main branch on<b class="drac-text-green"> GitHub</b>,
-          the website is automatically rebuild and redeployed. The backend is
-          deployed in a <b class="drac-text-cyan-secondary">Docker</b> container
-          on a<b class="drac-text-cyan"> DigitalOcean</b> droplet.
-        </p>
-      </span>
+    <div class={divStyle}>
+      <img
+        src={logo}
+        alt="The logo for Carndonagh Health Centre"
+        class="drac-w-8xl"
+      />
+      <h2 class="drac-heading drac-heading-xl drac-text-white">
+        Please see below for contact details for Carndonagh Health Centre
+      </h2>
+      <div class={dividerStyle} />
+      <div class={contactContainerStyle}>
+        <div class={contactStyle}>
+          <h3 class="drac-heading drac-heading-lg drac-text-white">Contact</h3>
+
+          <h4 class="drac-heading drac-heading drac-text-white">Call:</h4>
+          <span class={spanStyle}>074 937 4236</span>
+
+          <h4 class="drac-heading drac-heading drac-text-white">Email:</h4>
+          <span class={spanStyle}>reception@carndonaghhealthcentre.ie</span>
+        </div>
+        <div class={verticalDividerStyle} />
+        <div class={contactStyle}>
+          <h3 class="drac-heading drac-heading-lg drac-text-white">
+            Opening Hours
+          </h3>
+          <h4 class="drac-heading drac-heading drac-text-white">
+            Monday - Friday:
+          </h4>
+          <span class={spanStyle}>9AM - 5PM</span>
+        </div>
+      </div>
+      <div class={dividerStyle} />
     </div>
   );
 });
