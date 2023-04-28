@@ -1,11 +1,21 @@
-import { component$, Resource, useResource$, $ } from '@builder.io/qwik';
+import {
+  component$,
+  Resource,
+  useResource$,
+  $,
+  useSignal,
+} from '@builder.io/qwik';
 import type { DocumentHead } from '@builder.io/qwik-city';
 
 import { account, databases } from '~/api';
 import { divStyle, tdStyle } from '~/styles/general_styles.css';
 
 export default component$(() => {
-  const userData = useResource$(async () => {
+  const shouldRefreshUserData = useSignal(false);
+  const userData = useResource$(async ({ track }) => {
+    track(() => shouldRefreshUserData.value);
+    shouldRefreshUserData.value = false;
+
     const user = await account.get();
 
     console.log('user:', user);
@@ -34,6 +44,8 @@ export default component$(() => {
       '6445c1894a6cda3aa31b',
       id
     );
+    alert('Appointment deleted');
+    shouldRefreshUserData.value = true;
   });
 
   return (
