@@ -19,6 +19,8 @@
     "lint": "eslint \"src/**/*.ts*\"",
     "preview": "qwik build preview && vite preview --open",
     "start": "vite --open --mode ssr",
+    "test.unit": "vitest components",
+    "test.unit.ui": "vitest --ui components",
     "qwik": "qwik"
   },
   "devDependencies": {
@@ -30,6 +32,7 @@
     "@typescript-eslint/eslint-plugin": "5.58.0",
     "@typescript-eslint/parser": "5.58.0",
     "@vanilla-extract/css": "^1.11.0",
+    "@vitest/ui": "^0.29.7",
     "eslint": "8.38.0",
     "eslint-plugin-qwik": "0.102.0",
     "node-fetch": "3.3.1",
@@ -39,6 +42,7 @@
     "undici": "5.21.2",
     "vite": "4.2.1",
     "vite-tsconfig-paths": "4.2.0",
+    "vitest": "^0.29.7",
     "wrangler": "latest"
   },
   "dependencies": {
