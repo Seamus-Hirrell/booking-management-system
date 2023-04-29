@@ -1,9 +1,5 @@
 # Feedback
 
-## To-Do List
-
-- implement a whole bunch of unit tests
-
 ## Testing Video
 
 - show database during testing
