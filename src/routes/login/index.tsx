@@ -6,6 +6,7 @@ import type { DocumentHead } from '@builder.io/qwik-city';
 
 import { account, teams } from '~/api';
 import { isAdminContext, isLoggedInContext } from '~/root';
+
 import {
   formContainerStyle,
   formStyle,

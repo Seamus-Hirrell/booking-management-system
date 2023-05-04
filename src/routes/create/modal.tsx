@@ -1,9 +1,5 @@
-import {
-  component$,
-  $,
-  type Signal,
-  type QwikSubmitEvent,
-} from '@builder.io/qwik';
+import { component$, $ } from '@builder.io/qwik';
+import type { Signal, QwikSubmitEvent } from '@builder.io/qwik';
 import { useNavigate } from '@builder.io/qwik-city';
 
 import {
