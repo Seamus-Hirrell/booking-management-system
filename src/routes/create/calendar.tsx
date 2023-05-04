@@ -1,14 +1,7 @@
-/*
-This component displays one week.
-Each week contains 5 days.
-Each day begins at 9am and ends at 5pm.
-Each day is a row that contains 32 15 minute intervals.
-*/
-
 import { component$ } from '@builder.io/qwik';
 import type { Models } from 'appwrite';
-import { CalendarHeader } from './calendarHeader';
 
+import { CalendarHeader } from './calendarHeader';
 import { Day } from './day';
 
 interface CalendarProps {

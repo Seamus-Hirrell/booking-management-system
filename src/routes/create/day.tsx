@@ -1,13 +1,8 @@
-/*
-This component displays one day.
-Each day begins at 9am and ends at 5pm.
-Each day is a row that contains 32 15 minute intervals.
-*/
-
-import { component$, useSignal, type Signal, Fragment } from '@builder.io/qwik';
+import { component$, useSignal, Fragment } from '@builder.io/qwik';
+import type { Signal } from '@builder.io/qwik';
 import type { Models } from 'appwrite';
-import { Modal } from './modal';
 
+import { Modal } from './modal';
 import { redBoxStyle, greenBoxStyle } from './styles.css';
 
 interface DayProps {
